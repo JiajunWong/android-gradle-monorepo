@@ -1,0 +1,3 @@
+include ':messageapp'
+include ':app'
+rootProject.name='GradleMonoRepo'
