@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -28,22 +29,33 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    kapt {
+        generateStubs = true
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(":libraries:dagger_integration")
 
     implementation deps.kotlin.stdlib
-    implementation deps.material
     implementation deps.core_ktx
-    implementation deps.app_compat
-    implementation deps.constraint_layout
     implementation deps.navigation.fragment_ktx
     implementation deps.navigation.ui_ktx
+
+    implementation deps.material
+    implementation deps.app_compat
+    implementation deps.constraint_layout
 
     implementation deps.retrofit.retrofit
     implementation deps.retrofit.converter_gson
     implementation deps.retrofit.retrofit2_rxjava2_adapter
+
+    implementation deps.rxjava2
+    implementation deps.rx_android
+
+    kapt deps.dagger.compiler
+    implementation deps.dagger.runtime
 
     testImplementation deps.junit
     androidTestImplementation deps.atsl.ext_junit

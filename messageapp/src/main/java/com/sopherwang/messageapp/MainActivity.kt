@@ -1,33 +1,47 @@
 package com.sopherwang.messageapp
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
-
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.sopherwang.dagger_integration.HasComponent
+import com.sopherwang.message_demo.features.message_list.MessageViewModel
+import com.sopherwang.messageapp.data.models.Message
+import dagger.Component
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val repoViewModel: MessageViewModel by viewModels {
+        viewModelFactory
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        DaggerMainActivity_MainActivityComponent.builder()
+            .parentComponent((application as HasComponent<ParentComponent>).component())
+            .build()
+            .inject(this)
+
         setContentView(R.layout.activity_main)
+
+        repoViewModel.getMessage()
+            .observe(this, Observer<List<Message>>{ message ->
+                // update UI
+                Log.d("jiajun", ""+message)
+            })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
+    interface ParentComponent {
+        fun viewModelFactory(): ViewModelProvider.Factory
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
+    @Component(dependencies = [ParentComponent::class])
+    interface MainActivityComponent {
+        fun inject(activity: MainActivity)
     }
 }

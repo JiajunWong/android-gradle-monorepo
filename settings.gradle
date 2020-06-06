@@ -1,3 +1,4 @@
+include ':libraries:dagger_integration'
 include ':messageapp'
 include ':app'
 rootProject.name='GradleMonoRepo'
