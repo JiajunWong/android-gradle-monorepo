@@ -54,6 +54,9 @@ dependencies {
     implementation deps.rxjava2
     implementation deps.rx_android
 
+    kapt deps.glide.compiler
+    implementation deps.glide.runtime
+
     kapt deps.dagger.compiler
     implementation deps.dagger.runtime
 

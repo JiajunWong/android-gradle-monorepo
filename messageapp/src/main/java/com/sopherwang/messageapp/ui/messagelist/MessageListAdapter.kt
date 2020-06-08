@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.sopherwang.messageapp.R
 import com.sopherwang.messageapp.data.models.Message
 import javax.inject.Inject
@@ -31,6 +32,7 @@ class MessageListAdapter @Inject constructor(private val context: Context) :
         holder.titleTextView.text = message.author.name
         holder.timeTextView.text = message.updated
         holder.contentTextView.text = message.content
+        Glide.with(context).load("https://message-list.appspot.com/" + message.author.photoUrl).into(holder.avatarImageView)
     }
 
     override fun getItemCount(): Int {
