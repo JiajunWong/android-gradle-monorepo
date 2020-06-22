@@ -1,17 +1,20 @@
 package com.sopherwang.message_demo.features.message_list
 
 import android.util.Log
+import androidx.hilt.Assisted
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.sopherwang.messageapp.data.ApiStores
 import com.sopherwang.messageapp.data.models.Message
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
 
-class MessageViewModel @Inject constructor(private val apiStore: ApiStores) : ViewModel() {
+class MessageViewModel @ViewModelInject constructor(private val apiStore: ApiStores, @Assisted private val savedStateHandle: SavedStateHandle
+) : ViewModel() {
     private val messageList: MutableLiveData<List<Message>> = MutableLiveData()
 
     private var disposable: Disposable? = null

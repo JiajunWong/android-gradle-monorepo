@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 29
@@ -36,7 +37,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation project(":libraries:dagger_integration")
+//    implementation project(":libraries:dagger_integration")
 
     implementation deps.kotlin.stdlib
     implementation deps.core_ktx
@@ -60,8 +61,17 @@ dependencies {
     kapt deps.dagger.compiler
     implementation deps.dagger.runtime
 
-    testImplementation deps.junit
-    androidTestImplementation deps.atsl.ext_junit
-    androidTestImplementation deps.espresso.core
+    kapt deps.hilt.compiler
+    kapt deps.hilt.android_compiler
+    implementation deps.hilt.runtime
+    implementation deps.hilt.view_model
 
+    testImplementation deps.junit
+    testImplementation deps.mockito.core
+
+    androidTestImplementation deps.atsl.ext_junit
+    androidTestImplementation deps.arch_core.testing
+    androidTestImplementation deps.espresso.core
+    androidTestImplementation deps.mockito.core
+    androidTestImplementation deps.mockito.android
 }
