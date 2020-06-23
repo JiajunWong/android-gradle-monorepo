@@ -1,4 +1,4 @@
-package com.sopherwang.message_demo.features.message_list
+package com.sopherwang.messageapp.ui.messagelist
 
 import android.util.Log
 import androidx.hilt.Assisted

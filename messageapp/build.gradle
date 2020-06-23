@@ -33,6 +33,12 @@ android {
     kapt {
         generateStubs = true
     }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            unitTests.returnDefaultValues = true
+        }
+    }
 }
 
 dependencies {
@@ -66,12 +72,20 @@ dependencies {
     implementation deps.hilt.runtime
     implementation deps.hilt.view_model
 
+    testImplementation deps.arch_core.testing
     testImplementation deps.junit
     testImplementation deps.mockito.core
+    testImplementation deps.robolectric
 
+    androidTestImplementation deps.atsl.core
     androidTestImplementation deps.atsl.ext_junit
+    androidTestImplementation deps.atsl.runner
+    androidTestImplementation deps.atsl.rules
+
     androidTestImplementation deps.arch_core.testing
     androidTestImplementation deps.espresso.core
+    androidTestImplementation deps.espresso.contrib
+
     androidTestImplementation deps.mockito.core
     androidTestImplementation deps.mockito.android
 }
