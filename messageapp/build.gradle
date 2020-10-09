@@ -63,6 +63,8 @@ dependencies {
     implementation deps.room.rxjava2
     implementation deps.room.kotlin
 
+    implementation deps.paging_ktx
+
     implementation deps.rxjava2
     implementation deps.rx_android
 
