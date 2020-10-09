@@ -6,8 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sopherwang.messageapp.ui.messagelist.MessageListAdapter
 import com.sopherwang.messageapp.ui.messagelist.MessageViewModel
+import com.sopherwang.messageapp.data.models.Message
+import com.sopherwang.messageapp.ui.messagelist.MessageListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         repoViewModel.getMessage()
-            .observe(this, Observer { messages ->
+            .observe(this, Observer<List<Message>>{ messages ->
                 adapter.setMessageList(messages)
             })
     }
