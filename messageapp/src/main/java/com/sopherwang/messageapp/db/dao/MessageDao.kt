@@ -1,6 +1,5 @@
 package com.sopherwang.messageapp.db.dao
 
-import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -13,8 +12,8 @@ interface MessageDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertMessages(messageEntities: List<Message>)
 
-    @Query("SELECT * FROM " + AppConfig.DB_NAME + " ORDER BY id ASC")
-    fun loadMessages(): DataSource.Factory<Int, Message>
+//    @Query("SELECT * FROM " + AppConfig.DB_NAME + " ORDER BY id ASC")
+//    fun loadMessages(): DataSource.Factory<Int?, ModelMessage?>?
 
     @Query("DELETE FROM " + AppConfig.DB_NAME + " WHERE id = :id")
     fun deleteMessage(id: Long)
