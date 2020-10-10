@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sopherwang.message.module_message_list">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application android:name=".MessageListApplication"
         android:allowBackup="true"
         android:label="MessageList"
