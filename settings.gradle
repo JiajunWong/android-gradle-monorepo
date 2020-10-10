@@ -1,3 +1,5 @@
+include ':apps:message:library_common_network'
+include ':apps:message:module_message_list'
 include ':libraries:dagger_integration'
 include ':messageapp'
 include ':app'
