@@ -53,8 +53,11 @@ versions.truth = "1.0.1"
 versions.work = "2.2.0"
 ext.versions = versions
 
+versions.arouter_api = "1.5.0"
+versions.arouter_compiler = "1.2.0"
+
 def build_versions = [:]
-build_versions.min_sdk = 14
+build_versions.min_sdk = 22
 build_versions.compile_sdk = 29
 build_versions.target_sdk = 29
 build_versions.build_tools = "29.0.3"
@@ -210,6 +213,11 @@ work.testing = "androidx.work:work-testing:$versions.work"
 work.firebase = "androidx.work:work-firebase:$versions.work"
 work.runtime_ktx = "androidx.work:work-runtime-ktx:$versions.work"
 deps.work = work
+
+def arouter = [:]
+arouter.api = "com.alibaba:arouter-api:$versions.arouter_api"
+arouter.compiler = "com.alibaba:arouter-compiler:$versions.arouter_compiler"
+deps.arouter = arouter
 
 ext.deps = deps
 

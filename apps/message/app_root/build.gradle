@@ -5,15 +5,22 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "29.0.3"
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
 
     defaultConfig {
         applicationId "com.sopherwang.message.app_root"
-        minSdkVersion 22
-        targetSdkVersion 30
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString(),
+                              AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -56,6 +63,9 @@ dependencies {
     implementation deps.material
     implementation deps.app_compat
     implementation deps.constraint_layout
+
+    kapt deps.arouter.compiler
+    implementation deps.arouter.api
 
     implementation deps.retrofit.retrofit
     implementation deps.retrofit.converter_gson

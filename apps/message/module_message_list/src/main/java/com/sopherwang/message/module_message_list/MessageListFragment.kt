@@ -9,9 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.sopherwang.message.library_common_network.models.Message
 import dagger.hilt.android.AndroidEntryPoint
 
+@Route(path = "/message/messageList")
 @AndroidEntryPoint
 class MessageListFragment: Fragment() {
     private val repoViewModel: MessageViewModel by viewModels()
