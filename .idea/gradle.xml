@@ -15,7 +15,9 @@
             <option value="$PROJECT_DIR$/apps/message" />
             <option value="$PROJECT_DIR$/apps/message/app_root" />
             <option value="$PROJECT_DIR$/apps/message/library_common_network" />
+            <option value="$PROJECT_DIR$/apps/message/module_message_detail" />
             <option value="$PROJECT_DIR$/apps/message/module_message_list" />
+            <option value="$PROJECT_DIR$/apps/message/module_message_list_export" />
             <option value="$PROJECT_DIR$/libraries" />
             <option value="$PROJECT_DIR$/libraries/dagger_integration" />
           </set>

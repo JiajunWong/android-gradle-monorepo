@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.sopherwang.message.library_common_network.models.Message
+import com.sopherwang.message.module_message_list_export.MessageListRouter
 import dagger.hilt.android.AndroidEntryPoint
 
-@Route(path = "/message/messageList")
+@Route(path = MessageListRouter.PATH_FRAGMENT_MESSAGE_LIST)
 @AndroidEntryPoint
 class MessageListFragment: Fragment() {
     private val repoViewModel: MessageViewModel by viewModels()

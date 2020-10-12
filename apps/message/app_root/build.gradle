@@ -53,6 +53,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(":apps:message:module_message_list")
+    implementation project(":apps:message:module_message_list_export")
     implementation project(":apps:message:library_common_network")
 
     implementation deps.kotlin.stdlib

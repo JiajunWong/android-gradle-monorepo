@@ -1,9 +1,4 @@
-if (isModule.toBoolean()) {
-    apply plugin: 'com.android.application'
-} else {
-    apply plugin: 'com.android.library'
-}
-
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -14,9 +9,10 @@ android {
     buildToolsVersion build_versions.build_tools
 
     defaultConfig {
-        if (isModule.toBoolean()) {
-            applicationId "com.sopherwang.message.module_message_list"
-        }
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -25,23 +21,8 @@ android {
             }
         }
 
-        minSdkVersion build_versions.min_sdk
-        targetSdkVersion build_versions.target_sdk
-        versionCode 1
-        versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-    }
-
-    sourceSets {
-        main {
-            if (isModule.toBoolean()) {
-                manifest.srcFile 'src/main/moduleManifest/AndroidManifest.xml'
-            } else {
-                manifest.srcFile 'src/main/AndroidManifest.xml'
-            }
-        }
     }
 
     buildTypes {
@@ -71,7 +52,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation project(":apps:message:module_message_list_export")
     implementation project(":apps:message:library_common_network")
 
     implementation deps.kotlin.stdlib
