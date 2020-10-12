@@ -5,5 +5,5 @@ import com.sopherwang.message.library_common_network.models.Message
 
 interface IMessageListService: IProvider {
 
-    fun getMessage(): Message
+    fun onListItemClicked(): Message
 }
