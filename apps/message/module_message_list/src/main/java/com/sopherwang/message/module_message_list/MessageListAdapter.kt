@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.sopherwang.message.library_common_network.models.Message
 import javax.inject.Inject
 
-class MessageListAdapter @Inject constructor(private val context: Context) :
+class MessageListAdapter @Inject constructor(private val context: Context, private val listItemClickListener: ListItemClickListener) :
     RecyclerView.Adapter<MessageListAdapter.ViewHolder>() {
     private val messageList: MutableList<Message> = mutableListOf()
 
@@ -32,6 +32,10 @@ class MessageListAdapter @Inject constructor(private val context: Context) :
         holder.timeTextView.text = message.updated
         holder.contentTextView.text = message.content
         Glide.with(context).load("https://message-list.appspot.com/" + message.author.photoUrl).into(holder.avatarImageView)
+
+        holder.rootView.setOnClickListener {
+            listItemClickListener.onItemClicked(message)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -39,6 +43,7 @@ class MessageListAdapter @Inject constructor(private val context: Context) :
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val rootView: View = itemView.findViewById(R.id.list_item_message_root)
         var titleTextView: TextView = itemView.findViewById(R.id.list_item_message_title)
         var timeTextView: TextView = itemView.findViewById(R.id.list_item_message_time)
         var contentTextView: TextView = itemView.findViewById(R.id.list_item_message_content)

@@ -1,9 +1,9 @@
 package com.sopherwang.message.module_message_list_export
 
-import com.alibaba.android.arouter.facade.template.IProvider
 import com.sopherwang.message.library_common_network.models.Message
+import io.reactivex.Observable
 
-interface IMessageListService: IProvider {
+interface IMessageListService {
 
-    fun onListItemClicked(): Message
+    fun onListItemClicked(): Observable<Message>
 }

@@ -12,12 +12,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.sopherwang.message.library_common_network.models.Message
 import com.sopherwang.message.module_message_list_export.MessageListRouter
+import com.sopherwang.message.module_message_list_export.MessageListService
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @Route(path = MessageListRouter.PATH_FRAGMENT_MESSAGE_LIST)
 @AndroidEntryPoint
-class MessageListFragment: Fragment() {
+class MessageListFragment: Fragment(), ListItemClickListener {
     private val repoViewModel: MessageViewModel by viewModels()
+    @Inject lateinit var messageListService: MessageListService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -29,7 +32,7 @@ class MessageListFragment: Fragment() {
 
         context?.let {
             val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view_message)
-            val adapter = MessageListAdapter(it)
+            val adapter = MessageListAdapter(it, this)
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(it)
             repoViewModel.getMessage()
@@ -38,4 +41,12 @@ class MessageListFragment: Fragment() {
                 })
         }
     }
+
+    override fun onItemClicked(message: Message) {
+        messageListService.addMessage(message)
+    }
+}
+
+interface ListItemClickListener {
+    fun onItemClicked(message: Message)
 }
