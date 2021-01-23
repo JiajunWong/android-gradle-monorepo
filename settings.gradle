@@ -1,3 +1,5 @@
+include ':apps:mall:features:tab_me'
+include ':apps:mall:features:tab_subject'
 include ':apps:mall:features:tab_category'
 include ':apps:mall:app_root'
 include ':apps:mall:features:tab_main'
