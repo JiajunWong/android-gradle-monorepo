@@ -1,3 +1,4 @@
+include ':apps:mall:libraries:network'
 include ':apps:mall:features:tab_me'
 include ':apps:mall:features:tab_subject'
 include ':apps:mall:features:tab_category'
