@@ -36,6 +36,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(":apps:mall:features:tab_main")
+    implementation project(":apps:mall:features:tab_category")
+    implementation project(":apps:mall:features:tab_subject")
+    implementation project(":apps:mall:features:tab_me")
     implementation project(":libraries:ui:material_icons")
 
     implementation deps.kotlin.stdlib
