@@ -1,7 +1,10 @@
 include ':apps:mall:app_root'
+
+include ':apps:message:app_root'
 include ':apps:message:module_message_list_export'
 include ':apps:message:module_message_detail'
-include ':apps:message:app_root'
 include ':apps:message:library_common_network'
 include ':apps:message:module_message_list'
+
+include ':libraries:ui:material_icons'
 include ':libraries:dagger_integration'
