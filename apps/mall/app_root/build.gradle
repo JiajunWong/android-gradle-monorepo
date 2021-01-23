@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -40,6 +41,7 @@ dependencies {
     implementation project(":apps:mall:features:tab_category")
     implementation project(":apps:mall:features:tab_subject")
     implementation project(":apps:mall:features:tab_me")
+    implementation project(":apps:mall:libraries:network")
     implementation project(":libraries:ui:material_icons")
 
     implementation deps.kotlin.stdlib
@@ -52,6 +54,14 @@ dependencies {
     implementation deps.retrofit.retrofit
     implementation deps.retrofit.converter_gson
     implementation deps.retrofit.retrofit2_rxjava2_adapter
+
+    kapt deps.dagger.compiler
+    implementation deps.dagger.runtime
+
+    kapt deps.hilt.compiler
+    kapt deps.hilt.android_compiler
+    implementation deps.hilt.runtime
+    implementation deps.hilt.view_model
 
     implementation deps.rxjava2
     implementation deps.rx_android
