@@ -38,10 +38,14 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(":apps:mall:libraries:network")
+    implementation project(":apps:mall:libraries:repositories")
+    implementation project(":libraries:auto_disposable")
     implementation project(":libraries:ui:material_icons")
 
     implementation deps.kotlin.stdlib
     implementation deps.core_ktx
+    implementation deps.navigation.fragment_ktx
+    implementation deps.navigation.ui_ktx
 
     implementation deps.material
     implementation deps.app_compat

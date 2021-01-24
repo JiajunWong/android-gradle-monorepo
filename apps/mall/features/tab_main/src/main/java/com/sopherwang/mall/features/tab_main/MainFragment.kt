@@ -6,17 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.sopherwang.mall.libraries.network.ApiStores
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.sopherwang.mall.libraries.network.models.Advertise
+import com.sopherwang.mall.libraries.repositories.HomeContentRepository
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
-import io.reactivex.schedulers.Schedulers.io
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
-
-    @Inject
-    lateinit var apiStores: ApiStores
+    private val mainFragmentViewModel: MainFragmentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,15 +27,10 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        apiStores.getHomeContent()
-            .subscribeOn(io())
-            .observeOn(mainThread())
-            .subscribe {
-                if (it.code == 200) {
-                    Log.d("Jiajun", "Success: $it.data")
-                } else {
-                    Log.d("Jiajun", "Failed")
-                }
-            }
+        mainFragmentViewModel.messageList.observe(
+            viewLifecycleOwner,
+            Observer { advertises: List<Advertise>? ->
+                Log.d("jiajun", "$advertises")
+            })
     }
 }

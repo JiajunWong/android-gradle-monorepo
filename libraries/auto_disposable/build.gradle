@@ -1,9 +1,8 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
-    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -11,13 +10,13 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.sopherwang.mall.app_root"
         minSdkVersion 22
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -36,39 +35,11 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation project(":apps:mall:features:tab_main")
-    implementation project(":apps:mall:features:tab_category")
-    implementation project(":apps:mall:features:tab_subject")
-    implementation project(":apps:mall:features:tab_me")
-    implementation project(":apps:mall:libraries:network")
-    implementation project(":apps:mall:libraries:repositories")
-    implementation project(":libraries:ui:material_icons")
-
     implementation deps.kotlin.stdlib
     implementation deps.core_ktx
 
-    implementation deps.material
-    implementation deps.app_compat
-    implementation deps.constraint_layout
-
-    implementation deps.retrofit.retrofit
-    implementation deps.retrofit.converter_gson
-    implementation deps.retrofit.retrofit2_rxjava2_adapter
-
-    kapt deps.dagger.compiler
-    implementation deps.dagger.runtime
-
-    kapt deps.hilt.compiler
-    kapt deps.hilt.android_compiler
-    implementation deps.hilt.runtime
-    implementation deps.hilt.view_model
-
     implementation deps.rxjava2
     implementation deps.rx_android
-
-    kapt deps.glide.compiler
-    implementation deps.glide.runtime
 
     testImplementation deps.arch_core.testing
     testImplementation deps.junit
