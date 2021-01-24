@@ -19,6 +19,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/fragment_advertise_tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_main_advertise_banner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:tabBackground="@drawable/view_pager_indicator"
+                app:tabGravity="center"
+                app:tabIndicatorHeight="0dp"
+                app:tabPaddingEnd="@dimen/ui_base_dimen_1x"
+                app:tabPaddingStart="@dimen/ui_base_dimen_1x" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </FrameLayout>
