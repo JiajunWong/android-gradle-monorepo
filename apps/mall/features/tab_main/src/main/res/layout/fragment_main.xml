@@ -55,7 +55,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="@dimen/ui_base_dimen_2x">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -106,7 +107,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="@dimen/ui_base_dimen_2x">
 
                         <TextView
                             android:layout_width="wrap_content"

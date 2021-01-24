@@ -1,5 +1,6 @@
 package com.sopherwang.mall.features.tab_main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,10 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sopherwang.mall.features.tab_main.advertise_banner.AdvertiseBannerAdapter
+import com.sopherwang.mall.features.tab_main.product_grid.ProductGridAdapter
 import com.sopherwang.mall.libraries.network.models.HomeContentData
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +25,10 @@ class MainFragment : Fragment() {
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager2: ViewPager2
     private lateinit var advertiseBannerAdapter: AdvertiseBannerAdapter
+    private lateinit var newProductRecyclerView: RecyclerView
+    private lateinit var newProductAdapter: ProductGridAdapter
+    private lateinit var popularProductRecyclerView: RecyclerView
+    private lateinit var popularProductAdapter: ProductGridAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,16 +38,19 @@ class MainFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         tabLayout = view.findViewById(R.id.fragment_main_tablayout)
         viewPager2 = view.findViewById(R.id.fragment_main_advertise_banner)
+        newProductRecyclerView = view.findViewById(R.id.fragment_main_new_product_list)
+        popularProductRecyclerView = view.findViewById(R.id.fragment_main_popular_product_list)
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        advertiseBannerAdapter = AdvertiseBannerAdapter(this)
-        viewPager2.adapter = advertiseBannerAdapter
-        TabLayoutMediator(tabLayout, viewPager2)
-        { tab, position -> }.attach()
+        setupAdvertiseBanner()
+        context?.let {
+            setupNewProductList(it)
+            setupPopularProductList(it)
+        }
 
         mainFragmentViewModel.messageList.observe(
             viewLifecycleOwner,
@@ -48,7 +59,36 @@ class MainFragment : Fragment() {
                     it.advertiseList?.let { advertises ->
                         advertiseBannerAdapter.setAdvertiseList(advertises)
                     }
+                    it.newProductList?.let { newProducts ->
+                        newProductAdapter.addProducts(newProducts)
+                    }
+                    it.hotProductList?.let { popularProducts ->
+                        popularProductAdapter.addProducts(popularProducts)
+                    }
                 }
             })
+    }
+
+    private fun setupAdvertiseBanner(){
+        advertiseBannerAdapter = AdvertiseBannerAdapter(this)
+        viewPager2.adapter = advertiseBannerAdapter
+        TabLayoutMediator(tabLayout, viewPager2)
+        { tab, position -> }.attach()
+    }
+
+    private fun setupNewProductList(context: Context) {
+        newProductAdapter = ProductGridAdapter(context)
+        newProductRecyclerView.adapter = newProductAdapter
+        val gridLayoutManager = GridLayoutManager(context, 2)
+        newProductRecyclerView.layoutManager = gridLayoutManager
+        newProductRecyclerView.isNestedScrollingEnabled = true
+    }
+
+    private fun setupPopularProductList(context: Context) {
+        popularProductAdapter = ProductGridAdapter(context)
+        popularProductRecyclerView.adapter = popularProductAdapter
+        val gridLayoutManager = GridLayoutManager(context, 2)
+        popularProductRecyclerView.layoutManager = gridLayoutManager
+        popularProductRecyclerView.isNestedScrollingEnabled = true
     }
 }
