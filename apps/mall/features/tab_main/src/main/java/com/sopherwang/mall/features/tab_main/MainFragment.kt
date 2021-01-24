@@ -11,8 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sopherwang.mall.features.tab_main.advertise_banner.AdvertiseBannerAdapter
-import com.sopherwang.mall.libraries.network.models.Advertise
-import com.sopherwang.mall.libraries.repositories.HomeContentRepository
+import com.sopherwang.mall.libraries.network.models.HomeContentData
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,7 +28,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
-        tabLayout = view.findViewById(R.id.fragment_advertise_tablayout)
+        tabLayout = view.findViewById(R.id.fragment_main_tablayout)
         viewPager2 = view.findViewById(R.id.fragment_main_advertise_banner)
         return view
     }
@@ -44,9 +43,11 @@ class MainFragment : Fragment() {
 
         mainFragmentViewModel.messageList.observe(
             viewLifecycleOwner,
-            Observer { advertises: List<Advertise>? ->
-                advertises?.let {
-                    advertiseBannerAdapter.setAdvertiseList(it)
+            Observer { data: HomeContentData? ->
+                data?.let {
+                    it.advertiseList?.let { advertises ->
+                        advertiseBannerAdapter.setAdvertiseList(advertises)
+                    }
                 }
             })
     }

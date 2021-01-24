@@ -1,0 +1,5 @@
+<resources>
+    <string name="main_page_new_product">What\'s new</string>
+    <string name="main_page_popular_product">Popular</string>
+    <string name="main_page_see_more">See more</string>
+</resources>
