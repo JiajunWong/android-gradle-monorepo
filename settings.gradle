@@ -1,3 +1,4 @@
+include ':libraries:ui:base'
 include ':apps:mall:libraries:repositories'
 include ':libraries:auto_disposable'
 include ':apps:mall:libraries:network'

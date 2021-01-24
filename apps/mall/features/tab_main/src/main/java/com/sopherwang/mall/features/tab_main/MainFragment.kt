@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.viewpager2.widget.ViewPager2
+import com.sopherwang.mall.features.tab_main.advertise_banner.AdvertiseBannerAdapter
 import com.sopherwang.mall.libraries.network.models.Advertise
 import com.sopherwang.mall.libraries.repositories.HomeContentRepository
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,21 +18,31 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainFragment : Fragment() {
     private val mainFragmentViewModel: MainFragmentViewModel by viewModels()
 
+    private lateinit var viewPager2: ViewPager2
+    private lateinit var advertiseBannerAdapter: AdvertiseBannerAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        val view = inflater.inflate(R.layout.fragment_main, container, false)
+        viewPager2 = view.findViewById(R.id.fragment_main_advertise_banner)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        advertiseBannerAdapter = AdvertiseBannerAdapter(this)
+        viewPager2.adapter = advertiseBannerAdapter
+
         mainFragmentViewModel.messageList.observe(
             viewLifecycleOwner,
             Observer { advertises: List<Advertise>? ->
-                Log.d("jiajun", "$advertises")
+                advertises?.let {
+                    advertiseBannerAdapter.setAdvertiseList(it)
+                }
             })
     }
 }
