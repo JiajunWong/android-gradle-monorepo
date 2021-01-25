@@ -36,12 +36,12 @@
                 app:tabPaddingEnd="@dimen/ui_base_dimen_1x"
                 app:tabPaddingStart="@dimen/ui_base_dimen_1x" />
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/fragment_main_new_product_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/ui_base_dimen_2x"
-                app:cardElevation="2dp"
+                android:layout_marginTop="@dimen/ui_base_dimen_1x"
+                app:cardCornerRadius="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_main_advertise_banner">
@@ -49,26 +49,30 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/ui_base_dimen_2x">
+                    android:background="?attr/colorSurface"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="@dimen/ui_base_dimen_2x">
+                        android:paddingStart="@dimen/ui_base_dimen_2x"
+                        android:paddingEnd="@dimen/ui_base_dimen_2x">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/main_page_new_product" />
+                            android:text="@string/main_page_new_product"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textColor="@color/material_on_surface_emphasis_high_type" />
 
                         <Space
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1" />
 
-                        <TextView
+                        <Button
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/main_page_see_more" />
@@ -76,24 +80,33 @@
                         <ImageView
                             android:layout_width="@dimen/ui_base_dimen_3x"
                             android:layout_height="@dimen/ui_base_dimen_3x"
+                            android:layout_gravity="center_vertical"
                             android:adjustViewBounds="true"
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_keyboard_arrow_right" />
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/ui_base_dimen_0.25x"
+                        android:layout_marginStart="@dimen/ui_base_dimen_2x"
+                        android:layout_marginEnd="@dimen/ui_base_dimen_2x"
+                        android:layout_marginBottom="@dimen/ui_base_dimen_1x"
+                        android:background="?dividerColor" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/fragment_main_new_product_list"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/fragment_main_popular_product_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/ui_base_dimen_2x"
-                app:cardElevation="2dp"
+                android:layout_marginTop="@dimen/ui_base_dimen_1x"
+                app:cardCornerRadius="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_main_new_product_container">
@@ -101,26 +114,30 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/ui_base_dimen_2x">
+                    android:background="?attr/colorSurface"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="@dimen/ui_base_dimen_2x">
+                        android:paddingStart="@dimen/ui_base_dimen_2x"
+                        android:paddingEnd="@dimen/ui_base_dimen_2x">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/main_page_popular_product" />
+                            android:text="@string/main_page_popular_product"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textColor="@color/material_on_surface_emphasis_high_type" />
 
                         <Space
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1" />
 
-                        <TextView
+                        <Button
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/main_page_see_more" />
@@ -128,17 +145,26 @@
                         <ImageView
                             android:layout_width="@dimen/ui_base_dimen_3x"
                             android:layout_height="@dimen/ui_base_dimen_3x"
+                            android:layout_gravity="center_vertical"
                             android:adjustViewBounds="true"
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_keyboard_arrow_right" />
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/ui_base_dimen_0.25x"
+                        android:layout_marginBottom="@dimen/ui_base_dimen_1x"
+                        android:background="?dividerColor"
+                        android:layout_marginStart="@dimen/ui_base_dimen_2x"
+                        android:layout_marginEnd="@dimen/ui_base_dimen_2x" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/fragment_main_popular_product_list"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </FrameLayout>

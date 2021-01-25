@@ -20,6 +20,8 @@
         android:layout_height="0dp"
         android:paddingStart="@dimen/ui_base_dimen_2x"
         android:paddingEnd="@dimen/ui_base_dimen_2x"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        android:textColor="@color/material_on_surface_emphasis_high_type"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/list_item_main_product_image" />
 
@@ -28,17 +30,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/ui_base_dimen_2x"
+        android:textAppearance="?attr/textAppearanceBody2"
+        android:textColor="@color/material_on_surface_emphasis_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/list_item_main_product_name"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/list_item_main_product_name" />
 
     <TextView
         android:id="@+id/list_item_main_product_sold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingEnd="@dimen/ui_base_dimen_2x"
+        android:textAppearance="?attr/textAppearanceBody2"
+        android:textColor="@color/material_on_surface_emphasis_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/list_item_main_product_price"
-        app:layout_constraintTop_toBottomOf="@id/list_item_main_product_name"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/list_item_main_product_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

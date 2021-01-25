@@ -12,10 +12,13 @@
 
     <color name="red_200">#cf6679</color> <!--Color error (dark)-->
     <color name="red_600">#b00020</color> <!--Color error (light)-->
+    
+    <color name="grey_400">#F5F5F5</color> <!--Color divider -->
 
     <!--Color surface (light), color on error (light), -->
     <!--color on surface (dark), color on surface (dark)-->
-    <color name="white_50">#ffffff</color>
+    <color name="white">#ffffff</color>
+    <color name="white_50">#F5F5F5</color>
 
     <color name="black_800">#121212</color> <!--Color surface (dark)-->
     <!--Color on secondary (light), color on background (light),-->

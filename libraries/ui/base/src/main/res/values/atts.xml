@@ -4,6 +4,7 @@
     <!--Common attributes-->
     <attr name="colorFillColor" format="color"/>
     <attr name="colorStrokeColor" format="color"/>
+    <attr name="dividerColor" format="color"/>
 
     <!--Label view attributes-->
     <declare-styleable name="LabelLinkView">
