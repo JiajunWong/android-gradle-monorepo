@@ -49,6 +49,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/ui_base_dimen_1x"
                     android:background="?attr/colorSurface"
                     android:orientation="vertical">
 
@@ -97,7 +98,9 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/fragment_main_new_product_list"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/ui_base_dimen_0.5x"
+                        android:layout_marginEnd="@dimen/ui_base_dimen_0.5x"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -114,6 +117,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/ui_base_dimen_1x"
                     android:background="?attr/colorSurface"
                     android:orientation="vertical">
 
