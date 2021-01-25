@@ -4,4 +4,7 @@
     <dimen name="ui_base_dimen_1x">8dp</dimen>
     <dimen name="ui_base_dimen_2x">16dp</dimen>
     <dimen name="ui_base_dimen_3x">24dp</dimen>
+
+    <dimen name="component_label_horizontal_margin">@dimen/ui_base_dimen_2x</dimen>
+    <dimen name="elevation_default_top_app_bar">@dimen/ui_base_dimen_0.5x</dimen>
 </resources>
