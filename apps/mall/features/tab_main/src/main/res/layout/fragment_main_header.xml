@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_main_header_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?colorPrimary"
+    app:layoutDescription="@xml/fragment_main_scene_header"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/fragment_main_advertise_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="2dp" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/fragment_main_tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:elevation="2dp"
+        app:tabBackground="@drawable/view_pager_indicator"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp"
+        app:tabPaddingEnd="@dimen/ui_base_dimen_1x"
+        app:tabPaddingStart="@dimen/ui_base_dimen_1x" />
+</androidx.constraintlayout.motion.widget.MotionLayout>
