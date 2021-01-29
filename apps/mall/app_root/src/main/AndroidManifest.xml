@@ -13,7 +13,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GradleMonoRepo"
+        android:theme="@style/Theme.Mall"
         tools:targetApi="n">
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -23,7 +23,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.sopherwang.mall.feature.authorization.OnBoardingActivity" />
+        <activity android:name="com.sopherwang.mall.feature.authorization.OnBoardingActivity"
+            android:theme="@style/OnBoarding.Theme.Mall"/>
     </application>
 
 </manifest>

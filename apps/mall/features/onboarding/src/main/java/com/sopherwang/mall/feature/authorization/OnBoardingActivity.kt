@@ -25,5 +25,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
         signUpButton = findViewById(R.id.onboarding_button_sign_up)
         loginButton = findViewById(R.id.onboarding_button_login)
+
+
     }
 }
