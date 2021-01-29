@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
@@ -11,13 +11,13 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.sopherwang.mall.app_root"
         minSdkVersion 22
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -37,13 +37,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation project(":apps:mall:features:onboarding")
-    implementation project(":apps:mall:features:tab_main")
-    implementation project(":apps:mall:features:tab_category")
-    implementation project(":apps:mall:features:tab_subject")
-    implementation project(":apps:mall:features:tab_me")
     implementation project(":apps:mall:libraries:network")
     implementation project(":apps:mall:libraries:repositories")
+    implementation project(":libraries:ui:base")
     implementation project(":libraries:ui:material_icons")
 
     implementation deps.kotlin.stdlib

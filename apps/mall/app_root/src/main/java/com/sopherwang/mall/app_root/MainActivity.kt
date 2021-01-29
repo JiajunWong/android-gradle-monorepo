@@ -6,18 +6,29 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.sopherwang.mall.feature.authorization.OnBoardingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private lateinit var cartButton: FloatingActionButton
     private lateinit var viewPager: ViewPager2
     private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setupCartButton()
         setupBottomNavView()
         setupViewPager()
+    }
+
+    private fun setupCartButton() {
+        cartButton = findViewById(R.id.main_page_fab)
+        cartButton.setOnClickListener {
+            OnBoardingActivity.startActivity(this)
+        }
     }
 
     private fun setupBottomNavView() {

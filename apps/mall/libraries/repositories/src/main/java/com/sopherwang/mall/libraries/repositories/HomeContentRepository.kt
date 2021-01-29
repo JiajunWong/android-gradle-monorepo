@@ -1,10 +1,8 @@
 package com.sopherwang.mall.libraries.repositories
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.sopherwang.mall.libraries.network.ApiStores
-import com.sopherwang.mall.libraries.network.models.Advertise
 import com.sopherwang.mall.libraries.network.models.HomeContentData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

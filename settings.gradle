@@ -1,3 +1,4 @@
+include ':apps:mall:features:onboarding'
 include ':apps:mall:app_root'
 include ':apps:mall:features:tab_me'
 include ':apps:mall:features:tab_subject'
