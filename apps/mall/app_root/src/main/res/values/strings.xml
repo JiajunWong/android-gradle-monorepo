@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">app_root</string>
+    <string name="app_name">Mall</string>
 
-    <string name="bottom_nav_tab_main">Main</string>
+    <string name="app_bar_menu_search">Search</string>
+
+    <string name="bottom_nav_tab_main">Home</string>
     <string name="bottom_nav_tab_category">Category</string>
     <string name="bottom_nav_tab_subject">Subject</string>
     <string name="bottom_nav_tab_me">Me</string>
