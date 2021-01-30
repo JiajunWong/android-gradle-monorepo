@@ -2,33 +2,73 @@ package com.sopherwang.mall.app_root
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.sopherwang.mall.feature.authorization.OnBoardingActivity
+import com.sopherwang.mall.feature.authorization.OnBoardingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var cartButton: FloatingActionButton
+    private lateinit var root: MotionLayout
     private lateinit var viewPager: ViewPager2
     private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var onBoardingFragment: OnBoardingFragment
+
+    private var lastProgress = 0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setupCartButton()
+        setupRoot()
         setupBottomNavView()
         setupViewPager()
     }
 
-    private fun setupCartButton() {
-        cartButton = findViewById(R.id.main_page_fab)
-        cartButton.setOnClickListener {
-            OnBoardingActivity.startActivity(this)
-        }
+    private fun setupRoot() {
+        onBoardingFragment = OnBoardingFragment.newInstance()
+        root = findViewById(R.id.activity_main_root)
+        root.setTransitionListener(object : MotionLayout.TransitionListener {
+            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+            }
+
+            override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
+                if (p3 - lastProgress > 0) {
+                    // from start to end
+                    val atEnd = Math.abs(p3 - 1f) < 0.1f
+                    if (atEnd) {
+                        val transaction = supportFragmentManager.beginTransaction()
+                        transaction
+                            .setCustomAnimations(R.animator.show, 0)
+                        transaction
+                            .setCustomAnimations(R.animator.show, 0)
+                            .replace(R.id.main_page_cart_container, onBoardingFragment)
+                            .commitNow()
+                    }
+                } else {
+                    // from end to start
+                    val atStart = p3 < 0.9f
+                    if (atStart) {
+                        val transaction = supportFragmentManager.beginTransaction()
+                        transaction
+                            .setCustomAnimations(0, R.animator.hide)
+                        transaction
+                            .remove(onBoardingFragment)
+                            .commitNow()
+                    }
+                }
+                lastProgress = p3
+            }
+
+            override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
+            }
+
+            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+            }
+
+        })
     }
 
     private fun setupBottomNavView() {

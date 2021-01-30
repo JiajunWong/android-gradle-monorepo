@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="activity_onboarding_welcome">Welcome</string>
+    <string name="activity_onboarding_description">Please sign up or log in to see more personalized content.</string>
     <string name="activity_onboarding_login">Log In</string>
     <string name="activity_onboarding_sign_up">Sign up</string>
 </resources>
