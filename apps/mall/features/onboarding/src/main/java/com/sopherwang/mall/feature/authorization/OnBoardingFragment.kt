@@ -40,6 +40,14 @@ class OnBoardingFragment : Fragment() {
         setupLoginButton()
     }
 
+    public fun onBackPressed(): Boolean {
+        if (root.progress > 0.5f) {
+            root.transitionToStart()
+            return true
+        }
+        return false
+    }
+
     private fun setupSignUpButton() {
         signUpButton.setOnClickListener {
             root.setTransition(

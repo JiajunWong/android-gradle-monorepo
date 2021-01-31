@@ -28,6 +28,14 @@ class MainActivity : AppCompatActivity() {
         setupViewPager()
     }
 
+    override fun onBackPressed() {
+        if (!onBoardingFragment.onBackPressed()) {
+            if (onBoardingFragment.isAdded) {
+                root.transitionToStart()
+            }
+        }
+    }
+
     private fun setupRoot() {
         onBoardingFragment = OnBoardingFragment.newInstance()
         root = findViewById(R.id.activity_main_root)

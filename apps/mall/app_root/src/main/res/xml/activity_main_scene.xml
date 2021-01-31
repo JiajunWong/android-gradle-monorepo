@@ -9,7 +9,7 @@
         motion:motionInterpolator="easeInOut">
 
         <OnClick
-            motion:clickAction="toggle"
+            motion:clickAction="transitionToEnd"
             motion:targetId="@+id/main_page_cart_container" />
     </Transition>
 

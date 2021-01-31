@@ -86,6 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/ui_base_dimen_1x"
+        android:clickable="false"
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
