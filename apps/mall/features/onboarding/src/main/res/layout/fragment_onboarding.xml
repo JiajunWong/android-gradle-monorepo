@@ -29,6 +29,30 @@
         app:layout_constraintTop_toBottomOf="@id/fragment_onboarding_title" />
 
     <LinearLayout
+        android:id="@+id/fragment_onboarding_button_containers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/fragment_onboarding_button_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/ui_base_dimen_2x"
+            android:text="@string/activity_onboarding_sign_up"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textColor="@color/material_on_surface_emphasis_medium" />
+
+        <Button
+            android:id="@+id/fragment_onboarding_button_login"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/ui_base_dimen_2x"
+            android:text="@string/activity_onboarding_login" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/fragment_onboarding_sign_up_containers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -121,30 +145,5 @@
             android:text="@string/activity_onboarding_submit"
             android:textAppearance="?attr/textAppearanceBody1"
             android:textColor="@color/material_on_surface_emphasis_medium" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/fragment_onboarding_button_containers"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/ui_base_dimen_1x"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/fragment_onboarding_button_sign_up"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/ui_base_dimen_2x"
-            android:text="@string/activity_onboarding_sign_up"
-            android:textAppearance="?attr/textAppearanceBody1"
-            android:textColor="@color/material_on_surface_emphasis_medium" />
-
-        <Button
-            android:id="@+id/fragment_onboarding_button_login"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/ui_base_dimen_2x"
-            android:text="@string/activity_onboarding_login" />
     </LinearLayout>
 </androidx.constraintlayout.motion.widget.MotionLayout>

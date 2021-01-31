@@ -12,26 +12,27 @@
             android:id="@+id/fragment_onboarding_button_containers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ui_base_dimen_2x"
             android:alpha="1"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_description" />
         <Constraint
             android:id="@+id/fragment_onboarding_sign_up_containers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:alpha="0"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_description" />
+            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_button_containers" />
         <Constraint
             android:id="@+id/fragment_onboarding_login_containers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:alpha="0"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_description" />
+            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_sign_up_containers" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/fragment_onborading_root_sign_up">
@@ -50,15 +51,15 @@
             android:alpha="1"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_description" />
+            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_button_containers" />
         <Constraint
             android:id="@+id/fragment_onboarding_login_containers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:alpha="0"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_description" />
+            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_sign_up_containers" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/fragment_onborading_root_login">
@@ -72,12 +73,12 @@
             motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_description" />
         <Constraint
             android:id="@+id/fragment_onboarding_sign_up_containers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:alpha="0"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_description" />
+            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_button_containers" />
         <Constraint
             android:id="@+id/fragment_onboarding_login_containers"
             android:layout_width="match_parent"
@@ -85,6 +86,6 @@
             android:alpha="1"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_description" />
+            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_sign_up_containers" />
     </ConstraintSet>
 </MotionScene>
