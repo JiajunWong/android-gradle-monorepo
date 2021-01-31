@@ -22,9 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.sopherwang.mall.feature.authorization.OnBoardingActivity"
-            android:theme="@style/OnBoarding.Theme.Mall"/>
     </application>
 
 </manifest>

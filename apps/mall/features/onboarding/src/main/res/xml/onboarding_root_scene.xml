@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetStart="@id/fragment_onborading_root_start"
+        motion:duration="250"
+        motion:motionInterpolator="linear" />
+
+    <ConstraintSet android:id="@+id/fragment_onborading_root_start">
+        <Constraint
+            android:id="@+id/fragment_onboarding_button_containers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="1"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_description" />
+        <Constraint
+            android:id="@+id/fragment_onboarding_sign_up_containers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_description" />
+        <Constraint
+            android:id="@+id/fragment_onboarding_login_containers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_description" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/fragment_onborading_root_sign_up">
+        <Constraint
+            android:id="@+id/fragment_onboarding_button_containers"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_description" />
+        <Constraint
+            android:id="@+id/fragment_onboarding_sign_up_containers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="1"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_description" />
+        <Constraint
+            android:id="@+id/fragment_onboarding_login_containers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_description" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/fragment_onborading_root_login">
+        <Constraint
+            android:id="@+id/fragment_onboarding_button_containers"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_description" />
+        <Constraint
+            android:id="@+id/fragment_onboarding_sign_up_containers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_description" />
+        <Constraint
+            android:id="@+id/fragment_onboarding_login_containers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="1"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/fragment_onboarding_description" />
+    </ConstraintSet>
+</MotionScene>

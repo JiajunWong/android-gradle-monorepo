@@ -29,4 +29,15 @@ class OnBoardingRepository @Inject constructor(private val apiStores: ApiStores)
                 }
             }
     }
+
+    fun login(signInRequest: SignInRequest) {
+        apiStores.login(signInRequest)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.code == 200) {
+                    Log.d("jiajun", "" + it.data)
+                }
+            }
+    }
 }
