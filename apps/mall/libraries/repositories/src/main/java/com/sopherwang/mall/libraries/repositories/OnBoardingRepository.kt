@@ -20,7 +20,6 @@ class OnBoardingRepository @Inject constructor(private val apiStores: ApiStores)
                 if (it.code == 200) {
                     apiStores.login(phoneNumber, password)
                 } else {
-                    Log.d("jiajun", "sign up failed ${it.message}")
                     Observable.never()
                 }
             }
@@ -28,7 +27,6 @@ class OnBoardingRepository @Inject constructor(private val apiStores: ApiStores)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 if (it.code == 200) {
-                    Log.d("jiajun", "" + it.data)
                     data.value = it.data?.token
                 }
             }
@@ -45,7 +43,6 @@ class OnBoardingRepository @Inject constructor(private val apiStores: ApiStores)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 if (it.code == 200) {
-                    Log.d("jiajun", "" + it.data)
                     data.value = it.data?.token
                 }
             }

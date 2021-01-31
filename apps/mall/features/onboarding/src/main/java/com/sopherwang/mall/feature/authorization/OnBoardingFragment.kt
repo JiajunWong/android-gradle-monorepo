@@ -113,7 +113,6 @@ class OnBoardingFragment : Fragment() {
             viewLifecycleOwner,
             Observer { data: String? ->
                 data?.let {
-                    Log.d("jiajun", "Sign up Success")
                 }
             })
     }
@@ -123,7 +122,6 @@ class OnBoardingFragment : Fragment() {
             viewLifecycleOwner,
             Observer { data: String? ->
                 data?.let {
-                    Log.d("jiajun", "Login Success")
                 }
             })
     }
