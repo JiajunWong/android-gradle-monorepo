@@ -4,8 +4,8 @@
     android:id="@+id/fragment_onboarding_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/onboarding_root_scene"
-    android:padding="@dimen/ui_base_dimen_3x">
+    android:padding="@dimen/ui_base_dimen_3x"
+    app:layoutDescription="@xml/onboarding_root_scene">
 
     <TextView
         android:id="@+id/fragment_onboarding_title"
@@ -59,41 +59,26 @@
         android:layout_marginTop="@dimen/ui_base_dimen_1x"
         android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_onboarding_sign_up_username"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:hint="@string/activity_onboarding_username" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fragment_onboarding_sign_up_username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/activity_onboarding_username" />
-        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_onboarding_sign_up_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:hint="@string/activity_onboarding_password" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fragment_onboarding_sign_up_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/activity_onboarding_password" />
-        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_onboarding_sign_up_auth_code"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fragment_onboarding_sign_up_auth_code"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/activity_onboarding_auth_code" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:hint="@string/activity_onboarding_auth_code" />
 
         <Button
             android:id="@+id/fragment_onboarding_button_sign_up_submit"
@@ -113,29 +98,19 @@
         android:clickable="false"
         android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_onboarding_login_username"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:hint="@string/activity_onboarding_username" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fragment_onboarding_login_username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/activity_onboarding_username" />
-        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_onboarding_login_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fragment_onboarding_login_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/activity_onboarding_password" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:hint="@string/activity_onboarding_password" />
 
         <Button
             android:id="@+id/fragment_onboarding_button_login_submit"

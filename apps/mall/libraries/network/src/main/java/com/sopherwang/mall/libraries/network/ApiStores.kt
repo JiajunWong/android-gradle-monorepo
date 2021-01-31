@@ -4,14 +4,18 @@ import com.sopherwang.mall.libraries.network.models.*
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ApiStores {
     @GET("home/content")
     abstract fun getHomeContent(): Observable<HomeContentResponse>
 
-    @POST("/register")
-    abstract fun register(signUpRequest: SignUpRequest): Observable<SignUpResponse>
+    @POST("sso/register")
+    abstract fun register(@Query("phoneNumber") phoneNumber: String,
+                          @Query("password") password: String,
+                          @Query("authCode") authCode: String): Observable<SignUpResponse>
 
-    @POST("/login")
-    abstract fun login(signInRequest: SignInRequest): Observable<SignInResponse>
+    @POST("sso/login")
+    abstract fun login(@Query("phoneNumber") phoneNumber: String,
+                       @Query("password") password: String): Observable<SignInResponse>
 }

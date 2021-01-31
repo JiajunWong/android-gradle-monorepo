@@ -1,20 +1,32 @@
 package com.sopherwang.mall.feature.authorization
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.LinearLayout
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.google.android.material.textfield.TextInputEditText
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OnBoardingFragment : Fragment() {
+    private val onBoardingViewModel: OnBoardingViewModel by viewModels()
+
     lateinit var root: MotionLayout
-    lateinit var authButtonContainer: LinearLayout
-    lateinit var signUpFlowContainer: LinearLayout
     lateinit var signUpButton: Button
     lateinit var loginButton: Button
+    lateinit var signUpSubmitButton: Button
+    lateinit var loginSubmitButton: Button
+    lateinit var signUpUsername: TextInputEditText
+    lateinit var signUpPassword: TextInputEditText
+    lateinit var signUpAuthCode: TextInputEditText
+    lateinit var loginUsername: TextInputEditText
+    lateinit var loginPassword: TextInputEditText
 
     companion object {
         fun newInstance() = OnBoardingFragment()
@@ -27,10 +39,15 @@ class OnBoardingFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_onboarding, container, false)
         root = view.findViewById(R.id.fragment_onboarding_root)
-        authButtonContainer = view.findViewById(R.id.fragment_onboarding_button_containers)
-        signUpFlowContainer = view.findViewById(R.id.fragment_onboarding_sign_up_containers)
         signUpButton = view.findViewById(R.id.fragment_onboarding_button_sign_up)
         loginButton = view.findViewById(R.id.fragment_onboarding_button_login)
+        signUpSubmitButton = view.findViewById(R.id.fragment_onboarding_button_sign_up_submit)
+        loginSubmitButton = view.findViewById(R.id.fragment_onboarding_button_login_submit)
+        signUpUsername = view.findViewById(R.id.fragment_onboarding_sign_up_username)
+        signUpPassword = view.findViewById(R.id.fragment_onboarding_sign_up_password)
+        signUpAuthCode = view.findViewById(R.id.fragment_onboarding_sign_up_auth_code)
+        loginUsername = view.findViewById(R.id.fragment_onboarding_login_username)
+        loginPassword = view.findViewById(R.id.fragment_onboarding_login_password)
         return view
     }
 
@@ -38,9 +55,13 @@ class OnBoardingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupSignUpButton()
         setupLoginButton()
+        setupSignUpSubmitButton()
+        sutupLoginSubmitButton()
+        subscribeSignUp()
+        subscribeLogin()
     }
 
-    public fun onBackPressed(): Boolean {
+    fun onBackPressed(): Boolean {
         if (root.progress > 0.5f) {
             root.transitionToStart()
             return true
@@ -59,12 +80,51 @@ class OnBoardingFragment : Fragment() {
     }
 
     private fun setupLoginButton() {
-        loginButton.setOnClickListener{
+        loginButton.setOnClickListener {
             root.setTransition(
                 R.id.fragment_onborading_root_start,
                 R.id.fragment_onborading_root_login
             )
             root.transitionToEnd()
         }
+    }
+
+    private fun setupSignUpSubmitButton() {
+        signUpSubmitButton.setOnClickListener {
+            val username = signUpUsername.text.toString()
+            val password = signUpPassword.text.toString()
+            val authCode = signUpAuthCode.text.toString()
+
+            onBoardingViewModel.updateSignUpRequest(username, password, authCode)
+        }
+    }
+
+    private fun sutupLoginSubmitButton() {
+        loginSubmitButton.setOnClickListener {
+            val username = loginUsername.text.toString()
+            val password = loginPassword.text.toString()
+
+            onBoardingViewModel.updateLoginRequest(username, password)
+        }
+    }
+
+    private fun subscribeSignUp() {
+        onBoardingViewModel.signUpTokenLiveData.observe(
+            viewLifecycleOwner,
+            Observer { data: String? ->
+                data?.let {
+                    Log.d("jiajun", "Sign up Success")
+                }
+            })
+    }
+
+    private fun subscribeLogin() {
+        onBoardingViewModel.loginTokenLiveData.observe(
+            viewLifecycleOwner,
+            Observer { data: String? ->
+                data?.let {
+                    Log.d("jiajun", "Login Success")
+                }
+            })
     }
 }

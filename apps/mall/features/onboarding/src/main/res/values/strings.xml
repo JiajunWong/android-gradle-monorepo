@@ -4,7 +4,7 @@
     <string name="activity_onboarding_description">Please sign up or log in to see more personalized content.</string>
     <string name="activity_onboarding_login">Log In</string>
     <string name="activity_onboarding_sign_up">Sign up</string>
-    <string name="activity_onboarding_username">Username</string>
+    <string name="activity_onboarding_username">Phone Number</string>
     <string name="activity_onboarding_password">Password</string>
     <string name="activity_onboarding_auth_code">Authentication Code</string>
     <string name="activity_onboarding_submit">Submit</string>
