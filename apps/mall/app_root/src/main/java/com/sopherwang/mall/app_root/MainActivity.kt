@@ -32,6 +32,8 @@ class MainActivity : AppCompatActivity() {
         if (!onBoardingFragment.onBackPressed()) {
             if (onBoardingFragment.isAdded) {
                 root.transitionToStart()
+            } else {
+                super.onBackPressed()
             }
         }
     }

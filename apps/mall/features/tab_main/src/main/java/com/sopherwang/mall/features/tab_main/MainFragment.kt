@@ -13,10 +13,14 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.sopherwang.libraries.network.common.models.Resource
+import com.sopherwang.libraries.network.common.models.Status
 import com.sopherwang.mall.features.tab_main.advertise_banner.AdvertiseBannerAdapter
 import com.sopherwang.mall.features.tab_main.product_grid.ProductGridAdapter
 import com.sopherwang.mall.libraries.network.models.HomeContentData
+import com.sopherwang.mall.libraries.network.models.HomeContentResponse
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
@@ -54,22 +58,33 @@ class MainFragment : Fragment() {
 
         mainFragmentViewModel.messageList.observe(
             viewLifecycleOwner,
-            Observer { data: HomeContentData? ->
-                data?.let {
-                    it.advertiseList?.let { advertises ->
-                        advertiseBannerAdapter.setAdvertiseList(advertises)
+            Observer { resource: Resource<HomeContentData> ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        // TODO: show loading
+                        Timber.tag(javaClass.simpleName).d("Fetch content loading")
                     }
-                    it.newProductList?.let { newProducts ->
-                        newProductAdapter.addProducts(newProducts)
+                    Status.SUCCESS -> {
+                        Timber.tag(javaClass.simpleName).d("Fetch content success")
+                        resource.data?.advertiseList?.let { advertises ->
+                            advertiseBannerAdapter.setAdvertiseList(advertises)
+                        }
+                        resource.data?.newProductList?.let { newProducts ->
+                            newProductAdapter.addProducts(newProducts)
+                        }
+                        resource.data?.hotProductList?.let { popularProducts ->
+                            popularProductAdapter.addProducts(popularProducts)
+                        }
                     }
-                    it.hotProductList?.let { popularProducts ->
-                        popularProductAdapter.addProducts(popularProducts)
+                    Status.ERROR -> {
+                        // TODO: show error
+                        Timber.tag(javaClass.simpleName).d("Fetch content error = ${resource.message}")
                     }
                 }
             })
     }
 
-    private fun setupAdvertiseBanner(){
+    private fun setupAdvertiseBanner() {
         advertiseBannerAdapter = AdvertiseBannerAdapter(this)
         viewPager2.adapter = advertiseBannerAdapter
         TabLayoutMediator(tabLayout, viewPager2)

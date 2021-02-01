@@ -1,4 +1,4 @@
-package com.sopherwang.libraries.network.common
+package com.sopherwang.libraries.network.common.models
 
 /**
  * A generic class that holds a value with its loading status.

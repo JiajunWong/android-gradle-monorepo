@@ -1,7 +1,6 @@
 package com.sopherwang.mall.feature.authorization
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.textfield.TextInputEditText
+import com.sopherwang.libraries.network.common.models.Status
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class OnBoardingFragment : Fragment() {
@@ -62,6 +63,9 @@ class OnBoardingFragment : Fragment() {
     }
 
     fun onBackPressed(): Boolean {
+        if (!isAdded) {
+            return false
+        }
         if (root.progress > 0.5f) {
             root.transitionToStart()
             return true
@@ -111,8 +115,17 @@ class OnBoardingFragment : Fragment() {
     private fun subscribeSignUp() {
         onBoardingViewModel.signUpTokenLiveData.observe(
             viewLifecycleOwner,
-            Observer { data: String? ->
-                data?.let {
+            Observer {
+                when (it.status) {
+                    Status.LOADING -> {
+                        Timber.tag(javaClass.simpleName).d("subscribeSignUp() loading.")
+                    }
+                    Status.SUCCESS -> {
+                        Timber.tag(javaClass.simpleName).d("subscribeSignUp() success.")
+                    }
+                    Status.ERROR -> {
+                        Timber.tag(javaClass.simpleName).d("subscribeSignUp() error = ${it.message}.")
+                    }
                 }
             })
     }
@@ -120,8 +133,17 @@ class OnBoardingFragment : Fragment() {
     private fun subscribeLogin() {
         onBoardingViewModel.loginTokenLiveData.observe(
             viewLifecycleOwner,
-            Observer { data: String? ->
-                data?.let {
+            Observer {
+                when (it.status) {
+                    Status.LOADING -> {
+                        Timber.tag(javaClass.simpleName).d("subscribeLogin() loading.")
+                    }
+                    Status.SUCCESS -> {
+                        Timber.tag(javaClass.simpleName).d("subscribeLogin() success token = ${it.data}")
+                    }
+                    Status.ERROR -> {
+                        Timber.tag(javaClass.simpleName).d("subscribeLogin() error = ${it.message}.")
+                    }
                 }
             })
     }

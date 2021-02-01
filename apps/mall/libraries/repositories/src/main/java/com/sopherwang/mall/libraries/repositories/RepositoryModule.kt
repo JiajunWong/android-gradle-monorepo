@@ -1,5 +1,6 @@
 package com.sopherwang.mall.libraries.repositories
 
+import com.sopherwang.libraries.network.common.AppExecutors
 import com.sopherwang.mall.libraries.network.ApiStores
 import dagger.Module
 import dagger.Provides
@@ -13,7 +14,13 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun homeContentRepository(apiStores: ApiStores): HomeContentRepository {
-        return HomeContentRepository(apiStores)
+    fun homeContentRepository(appExecutors: AppExecutors, apiStores: ApiStores): HomeContentRepository {
+        return HomeContentRepository(appExecutors, apiStores)
+    }
+
+    @Singleton
+    @Provides
+    fun onboardingRepository(appExecutors: AppExecutors, apiStores: ApiStores): OnBoardingRepository {
+        return OnBoardingRepository(appExecutors, apiStores)
     }
 }

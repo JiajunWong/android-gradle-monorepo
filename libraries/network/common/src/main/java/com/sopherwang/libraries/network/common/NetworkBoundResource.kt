@@ -4,13 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
+import com.sopherwang.libraries.network.common.models.*
+import timber.log.Timber
 
 /**
  * A generic class that can provide a resource backed by both the sqlite database and the network.
  *
- *
- * You can read more about it in the [Architecture
- * Guide](https://developer.android.com/arch).
  * @param <ResultType>
  * @param <RequestType>
 </RequestType></ResultType> */
@@ -20,15 +19,21 @@ abstract class NetworkBoundResource<ResultType, RequestType>
     private val result = MediatorLiveData<Resource<ResultType>>()
 
     init {
+        Timber.tag(javaClass.simpleName).d("Init with loading state.")
         result.value = Resource.loading(null)
         @Suppress("LeakingThis")
         val dbSource = loadFromDb()
         result.addSource(dbSource) { data ->
             result.removeSource(dbSource)
+
+            Timber.tag(javaClass.simpleName).d("Getting data from DB.")
+
             if (shouldFetch(data)) {
+                Timber.tag(javaClass.simpleName).d("Request data from network.")
                 fetchFromNetwork(dbSource)
             } else {
                 result.addSource(dbSource) { newData ->
+                    Timber.tag(javaClass.simpleName).d("Request data from DB.")
                     setValue(Resource.success(newData))
                 }
             }
@@ -51,6 +56,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>
         result.addSource(apiResponse) { response ->
             result.removeSource(apiResponse)
             result.removeSource(dbSource)
+
             when (response) {
                 is ApiSuccessResponse -> {
                     appExecutors.diskIO().execute {
@@ -88,7 +94,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>
     fun asLiveData() = result as LiveData<Resource<ResultType>>
 
     @WorkerThread
-    protected open fun processResponse(response: ApiSuccessResponse<RequestType>) = response.body
+    protected open fun processResponse(response: ApiSuccessResponse<RequestType>) = response.data
 
     @WorkerThread
     protected abstract fun saveCallResult(item: RequestType)

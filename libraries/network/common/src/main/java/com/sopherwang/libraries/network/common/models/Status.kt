@@ -1,4 +1,4 @@
-package com.sopherwang.libraries.network.common
+package com.sopherwang.libraries.network.common.models
 
 /**
  * Status of a resource that is provided to the UI.

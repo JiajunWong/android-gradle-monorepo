@@ -1,6 +1,7 @@
 package com.sopherwang.mall.libraries.network
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import com.sopherwang.libraries.network.common.AppExecutors
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +27,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun apiStores(retrofit: Retrofit) : ApiStores {
+    fun apiStores(retrofit: Retrofit): ApiStores {
         return retrofit.create(ApiStores::class.java)
     }
 
@@ -38,5 +39,11 @@ class NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
+    }
+
+    @Singleton
+    @Provides
+    fun appExecutors(): AppExecutors {
+        return AppExecutors()
     }
 }
