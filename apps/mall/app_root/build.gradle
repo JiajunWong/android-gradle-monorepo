@@ -71,6 +71,8 @@ dependencies {
     kapt deps.glide.compiler
     implementation deps.glide.runtime
 
+    implementation deps.timber
+
     testImplementation deps.arch_core.testing
     testImplementation deps.junit
     testImplementation deps.mockito.core

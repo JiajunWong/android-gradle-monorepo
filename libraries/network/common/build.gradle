@@ -3,7 +3,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
-    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -36,41 +35,15 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation project(":apps:mall:libraries:network")
-    implementation project(":apps:mall:libraries:repositories")
-    implementation project(":libraries:ui:base")
-    implementation project(":libraries:ui:material_icons")
-
-    implementation deps.material
-    implementation deps.app_compat
-    implementation deps.constraint_layout
-
     implementation deps.lifecycle.livedata_ktx
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.java8
     implementation deps.kotlin.stdlib
     implementation deps.core_ktx
-    implementation deps.navigation.fragment_ktx
-    implementation deps.navigation.ui_ktx
 
     implementation deps.retrofit.retrofit
     implementation deps.retrofit.converter_gson
     implementation deps.retrofit.retrofit2_rxjava2_adapter
-
-    kapt deps.dagger.compiler
-    implementation deps.dagger.runtime
-
-    kapt deps.hilt.compiler
-    kapt deps.hilt.android_compiler
-    implementation deps.hilt.runtime
-    implementation deps.hilt.view_model
-
-    implementation deps.rxjava2
-    implementation deps.rx_android
-
-    kapt deps.glide.compiler
-    implementation deps.glide.runtime
 
     implementation deps.timber
 
