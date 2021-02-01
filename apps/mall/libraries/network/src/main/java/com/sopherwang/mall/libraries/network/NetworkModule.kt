@@ -1,11 +1,14 @@
 package com.sopherwang.mall.libraries.network
 
+import android.content.Context
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.sopherwang.libraries.network.common.AppExecutors
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
@@ -33,9 +36,10 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun retrofit(@Named("baseUrl") baseUrl: String): Retrofit {
+    fun retrofit(@Named("baseUrl") baseUrl: String, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
@@ -45,5 +49,19 @@ class NetworkModule {
     @Provides
     fun appExecutors(): AppExecutors {
         return AppExecutors()
+    }
+
+    @Singleton
+    @Provides
+    fun okhttpClient(sessionManager: SessionManager): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(AuthInterceptor(sessionManager))
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    fun sessionManager(@ApplicationContext context: Context): SessionManager {
+        return SessionManager(context)
     }
 }

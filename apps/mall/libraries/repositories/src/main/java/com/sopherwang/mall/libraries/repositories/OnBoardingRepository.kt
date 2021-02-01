@@ -7,6 +7,7 @@ import com.sopherwang.libraries.network.common.AppExecutors
 import com.sopherwang.libraries.network.common.NetworkBoundResource
 import com.sopherwang.libraries.network.common.models.*
 import com.sopherwang.mall.libraries.network.ApiStores
+import com.sopherwang.mall.libraries.network.SessionManager
 import com.sopherwang.mall.libraries.network.models.SignInRequest
 import com.sopherwang.mall.libraries.network.models.SignUpRequest
 import io.reactivex.BackpressureStrategy
@@ -16,7 +17,8 @@ import javax.inject.Inject
 
 class OnBoardingRepository @Inject constructor(
     private val appExecutors: AppExecutors,
-    private val apiStores: ApiStores
+    private val apiStores: ApiStores,
+    private val sessionManager: SessionManager
 ) {
     val signUpLiveData = MutableLiveData<String>().apply { postValue(null) }
     val loginLiveData = MutableLiveData<String>().apply { postValue(null) }
@@ -26,6 +28,7 @@ class OnBoardingRepository @Inject constructor(
             override fun saveCallResult(item: String) {
                 appExecutors.mainThread().execute {
                     signUpLiveData.value = item
+                    sessionManager.saveAuthToken(item)
                 }
             }
 
@@ -84,6 +87,7 @@ class OnBoardingRepository @Inject constructor(
             override fun saveCallResult(item: String) {
                 appExecutors.mainThread().execute {
                     loginLiveData.value = item
+                    sessionManager.saveAuthToken(item)
                 }
             }
 
