@@ -39,7 +39,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRoot() {
-        onBoardingFragment = OnBoardingFragment.newInstance()
+        onBoardingFragment =
+            OnBoardingFragment.newInstance(object : OnBoardingFragment.AuthSuccessListener {
+                override fun onAuthSuccess() {
+                    if (onBoardingFragment.isAdded) {
+                        root.transitionToStart()
+                    }
+                }
+            })
         root = findViewById(R.id.activity_main_root)
         root.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {

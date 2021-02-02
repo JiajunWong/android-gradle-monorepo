@@ -2,6 +2,7 @@ package com.sopherwang.mall.libraries.repositories
 
 import com.sopherwang.libraries.network.common.AppExecutors
 import com.sopherwang.mall.libraries.network.ApiStores
+import com.sopherwang.mall.libraries.network.SessionManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,7 +21,7 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun onboardingRepository(appExecutors: AppExecutors, apiStores: ApiStores): OnBoardingRepository {
-        return OnBoardingRepository(appExecutors, apiStores)
+    fun onboardingRepository(appExecutors: AppExecutors, apiStores: ApiStores, sessionManager: SessionManager): OnBoardingRepository {
+        return OnBoardingRepository(appExecutors, apiStores, sessionManager)
     }
 }
