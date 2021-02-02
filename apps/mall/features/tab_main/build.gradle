@@ -39,7 +39,6 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(":apps:mall:libraries:network")
     implementation project(":apps:mall:libraries:repositories")
-    implementation project(":libraries:auto_disposable")
     implementation project(":libraries:ui:base")
     implementation project(":libraries:ui:material_icons")
     implementation project(":libraries:network:common")

@@ -45,6 +45,7 @@ dependencies {
     implementation project(":apps:mall:libraries:network")
     implementation project(":apps:mall:libraries:repositories")
     implementation project(":libraries:network:common")
+    implementation project(":libraries:ui:base")
     implementation project(":libraries:ui:material_icons")
 
     implementation deps.kotlin.stdlib
