@@ -7,4 +7,6 @@
     <string name="bottom_nav_tab_category">Category</string>
     <string name="bottom_nav_tab_subject">Subject</string>
     <string name="bottom_nav_tab_me">Me</string>
+
+    <string name="cart">Cart</string>
 </resources>

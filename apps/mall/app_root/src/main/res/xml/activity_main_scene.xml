@@ -9,36 +9,35 @@
         motion:motionInterpolator="easeInOut">
 
         <OnClick
-            motion:clickAction="transitionToEnd"
-            motion:targetId="@+id/main_page_cart_container" />
+            motion:clickAction="toggle"
+            motion:targetId="@+id/main_page_cart_fab" />
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
             android:id="@+id/main_page_cart_container"
-            android:layout_width="@dimen/ui_base_dimen_6x"
-            android:layout_height="@dimen/ui_base_dimen_6x"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginEnd="@dimen/ui_base_dimen_2x"
-            android:layout_marginBottom="@dimen/ui_base_dimen_2x"
-            motion:layout_constraintBottom_toTopOf="@+id/main_page_bottom_navigation"
+            android:layout_marginBottom="@dimen/ui_base_dimen_1x"
+            motion:layout_constraintBottom_toTopOf="@+id/main_page_cart_fab"
             motion:layout_constraintEnd_toEndOf="parent">
-            <CustomAttribute
-                motion:attributeName="BackgroundColor"
-                motion:customColorValue="?colorSecondary" />
         </Constraint>
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
         <Constraint
             android:id="@id/main_page_cart_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            motion:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/ui_base_dimen_2x"
+            android:layout_marginTop="@dimen/ui_base_dimen_2x"
+            android:layout_marginEnd="@dimen/ui_base_dimen_2x"
+            android:layout_marginBottom="@dimen/ui_base_dimen_1x"
+            motion:layout_constraintBottom_toTopOf="@+id/main_page_cart_fab"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="parent">
-            <CustomAttribute
-                motion:attributeName="BackgroundColor"
-                motion:customColorValue="?colorSurface" />
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent">
         </Constraint>
     </ConstraintSet>
 </MotionScene>
