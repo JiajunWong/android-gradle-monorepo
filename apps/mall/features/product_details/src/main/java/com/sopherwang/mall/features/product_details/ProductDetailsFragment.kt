@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.card.MaterialCardView
@@ -17,7 +18,9 @@ import com.sopherwang.libraries.data_layer.product.ProductViewModel
 import com.sopherwang.libraries.network.common.models.Status
 import com.sopherwang.mall.libraries.network.models.Brand
 import com.sopherwang.mall.libraries.network.models.Product
+import com.sopherwang.mall.libraries.network.models.ProductAttribute
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_product_details.*
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -28,6 +31,7 @@ class ProductDetailsFragment : Fragment() {
 
     private val productDetailsViewModel: ProductDetailsViewModel by viewModels()
     private val productViewModel: ProductViewModel by activityViewModels()
+    private val productDetailsAttributeAdapter = ProductDetailsAttributeAdapter()
 
     private lateinit var productImage: ImageView
     private lateinit var priceTextView: TextView
@@ -61,8 +65,15 @@ class ProductDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupAttributeRecyclerView()
         subscribeProductClickLiveData()
         subscribeRequestDetailsLiveData()
+    }
+
+    private fun setupAttributeRecyclerView() {
+        attributeRecyclerView.layoutManager = LinearLayoutManager(context)
+        attributeRecyclerView.adapter = productDetailsAttributeAdapter
+        attributeRecyclerView.isNestedScrollingEnabled = true
     }
 
     private fun subscribeProductClickLiveData() {
@@ -86,6 +97,9 @@ class ProductDetailsFragment : Fragment() {
                         it.data?.product?.let { product ->
                             updateViewByProduct(product)
                         }
+                        it.data?.productAttributeList?.let { attributeList ->
+                            updateAttributeList(attributeList)
+                        }
                         it.data?.brand?.let { brand ->
                             updateViewByBrand(brand)
                         }
@@ -101,8 +115,14 @@ class ProductDetailsFragment : Fragment() {
     private fun updateViewByProduct(product: Product) {
         Glide.with(this).load(product.pic).into(productImage)
         priceTextView.text = product.price.toString()
-        originalPriceTextView.text = getString(R.string.fragment_product_original_price, product.originalPrice)
+        originalPriceTextView.text =
+            getString(R.string.fragment_product_original_price, product.originalPrice)
         productNameTextView.text = product.name
+    }
+
+    private fun updateAttributeList(attributeList: List<ProductAttribute>) {
+        fragment_product_details_attribute_container.visibility = View.VISIBLE
+        productDetailsAttributeAdapter.updateAttributes(attributeList)
     }
 
     private fun updateViewByBrand(brand: Brand) {

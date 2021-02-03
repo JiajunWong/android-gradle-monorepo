@@ -101,7 +101,10 @@
                 android:id="@+id/fragment_product_details_attribute_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/ui_base_dimen_2x" />
+                android:paddingStart="@dimen/ui_base_dimen_2x"
+                android:paddingEnd="@dimen/ui_base_dimen_2x"
+                android:paddingTop="@dimen/ui_base_dimen_1x"
+                android:paddingBottom="@dimen/ui_base_dimen_1x"/>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
