@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:background="?android:colorBackground">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -25,10 +26,12 @@
             android:layout_marginStart="@dimen/ui_base_dimen_2x"
             android:layout_marginTop="@dimen/ui_base_dimen_2x"
             android:layout_marginEnd="@dimen/ui_base_dimen_2x"
-            app:cardCornerRadius="@dimen/ui_base_dimen_0.5x"
+            app:layout_goneMarginBottom="@dimen/ui_base_dimen_2x"
+            app:cardCornerRadius="@dimen/ui_base_dimen_1x"
             app:cardElevation="@dimen/ui_base_dimen_0.25x"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/fragment_product_details_attribute_container"
             app:layout_constraintTop_toBottomOf="@id/fragment_product_details_image">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,13 +76,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/ui_base_dimen_2x"
-                    android:textAppearance="?attr/textAppearanceHeadline4"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColor="@color/material_on_surface_emphasis_high_type"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/fragment_product_details_price" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -89,11 +91,13 @@
             android:layout_marginStart="@dimen/ui_base_dimen_2x"
             android:layout_marginTop="@dimen/ui_base_dimen_2x"
             android:layout_marginEnd="@dimen/ui_base_dimen_2x"
-            app:cardCornerRadius="@dimen/ui_base_dimen_0.5x"
+            android:visibility="gone"
+            app:cardCornerRadius="@dimen/ui_base_dimen_1x"
             app:cardElevation="@dimen/ui_base_dimen_0.25x"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_product_details_basic_container">
+            app:layout_constraintTop_toBottomOf="@id/fragment_product_details_basic_container"
+            app:layout_constraintBottom_toTopOf="@+id/fragment_product_details_brand_container">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragment_product_details_attribute_recycler_view"
@@ -106,11 +110,11 @@
             android:id="@+id/fragment_product_details_brand_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/ui_base_dimen_2x"
-            android:layout_marginTop="@dimen/ui_base_dimen_2x"
-            android:layout_marginEnd="@dimen/ui_base_dimen_2x"
-            app:cardCornerRadius="@dimen/ui_base_dimen_0.5x"
+            android:layout_margin="@dimen/ui_base_dimen_2x"
+            android:visibility="gone"
+            app:cardCornerRadius="@dimen/ui_base_dimen_1x"
             app:cardElevation="@dimen/ui_base_dimen_0.25x"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_product_details_attribute_container">
@@ -144,10 +148,10 @@
                     android:id="@+id/fragment_product_details_brand_description"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:textColor="@color/material_on_surface_emphasis_medium"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:textColor="@color/material_on_surface_emphasis_medium"
-                    android:textAppearance="?attr/textAppearanceBody1"
                     app:layout_constraintStart_toEndOf="@id/fragment_product_details_brand_logo"
                     app:layout_constraintTop_toBottomOf="@id/fragment_product_details_brand_name" />
             </androidx.constraintlayout.widget.ConstraintLayout>

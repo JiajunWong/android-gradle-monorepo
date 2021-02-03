@@ -11,8 +11,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.sopherwang.libraries.data_layer.product.ProductViewModel
 import com.sopherwang.libraries.network.common.models.Status
+import com.sopherwang.mall.libraries.network.models.Product
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -55,7 +57,19 @@ class ProductDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        subscribeProductClickLiveData()
+        subscribeRequestDetailsLiveData()
+    }
 
+    private fun subscribeProductClickLiveData() {
+        productViewModel.productLiveData.observe(viewLifecycleOwner, Observer { product ->
+            Timber.tag(javaClass.simpleName).d("Product ${product.name} has clicked")
+            productDetailsViewModel.updateProductId(product.id)
+            updateViewByProduct(product)
+        })
+    }
+
+    private fun subscribeRequestDetailsLiveData() {
         productDetailsViewModel.productDetailsLiveData.observe(
             viewLifecycleOwner,
             Observer {
@@ -65,6 +79,9 @@ class ProductDetailsFragment : Fragment() {
                     }
                     Status.SUCCESS -> {
                         Timber.tag(javaClass.simpleName).d("productDetailsLiveData success.")
+                        it.data?.product?.let { product ->
+                            updateViewByProduct(product)
+                        }
                     }
                     Status.ERROR -> {
                         Timber.tag(javaClass.simpleName)
@@ -72,9 +89,12 @@ class ProductDetailsFragment : Fragment() {
                     }
                 }
             })
+    }
 
-        productViewModel.productLiveData.observe(viewLifecycleOwner, Observer { product ->
-            Timber.tag(javaClass.simpleName).d("Product ${product.name} has clicked")
-        })
+    private fun updateViewByProduct(product: Product) {
+        Glide.with(this).load(product.pic).into(productImage)
+        priceTextView.text = product.price.toString()
+        originalPriceTextView.text = getString(R.string.fragment_product_original_price, product.originalPrice)
+        productNameTextView.text = product.name
     }
 }
