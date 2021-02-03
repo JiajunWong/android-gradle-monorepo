@@ -24,4 +24,10 @@ class RepositoryModule {
     fun onboardingRepository(appExecutors: AppExecutors, apiStores: ApiStores, sessionManager: SessionManager): OnBoardingRepository {
         return OnBoardingRepository(appExecutors, apiStores, sessionManager)
     }
+
+    @Singleton
+    @Provides
+    fun productDetailsRepository(appExecutors: AppExecutors, apiStores: ApiStores): ProductDetailsRepository {
+        return ProductDetailsRepository(appExecutors, apiStores)
+    }
 }

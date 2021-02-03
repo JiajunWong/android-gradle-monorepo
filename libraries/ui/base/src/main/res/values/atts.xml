@@ -5,6 +5,7 @@
     <attr name="colorFillColor" format="color"/>
     <attr name="colorStrokeColor" format="color"/>
     <attr name="dividerColor" format="color"/>
+    <attr name="priceColor" format="color"/>
 
     <!--Label view attributes-->
     <declare-styleable name="LabelLinkView">

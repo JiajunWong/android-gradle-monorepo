@@ -7,56 +7,54 @@ import com.sopherwang.libraries.network.common.AppExecutors
 import com.sopherwang.libraries.network.common.NetworkBoundResource
 import com.sopherwang.libraries.network.common.models.*
 import com.sopherwang.mall.libraries.network.ApiStores
-import com.sopherwang.mall.libraries.network.models.HomeContentData
+import com.sopherwang.mall.libraries.network.models.ProductDetailsData
 import io.reactivex.BackpressureStrategy
-import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
-import io.reactivex.schedulers.Schedulers.io
-import javax.inject.Inject
+import io.reactivex.schedulers.Schedulers
 
-class HomeContentRepository (
+class ProductDetailsRepository(
     private val appExecutors: AppExecutors,
     private val apiStores: ApiStores
 ) {
-    private val data = MutableLiveData<HomeContentData>().apply { postValue(null) }
+    private val productDetailsData = MutableLiveData<ProductDetailsData>().apply { postValue(null) }
 
-    fun getHomeContent(): LiveData<Resource<HomeContentData>> {
-        return object : NetworkBoundResource<HomeContentData, HomeContentData>(appExecutors) {
-            override fun saveCallResult(item: HomeContentData) {
+    fun getProductDetails(id: Int): LiveData<Resource<ProductDetailsData>> {
+        return object : NetworkBoundResource<ProductDetailsData, ProductDetailsData>(appExecutors) {
+            override fun saveCallResult(item: ProductDetailsData) {
                 appExecutors.mainThread().execute {
-                    data.value = item
+                    productDetailsData.value = item
                 }
             }
 
-            override fun shouldFetch(data: HomeContentData?): Boolean = true
+            override fun shouldFetch(data: ProductDetailsData?) = true
 
-            override fun loadFromDb(): LiveData<HomeContentData> = data
+            override fun loadFromDb() = productDetailsData
 
-            override fun createCall(): LiveData<ApiResponse<HomeContentData>> {
-                return LiveDataReactiveStreams.fromPublisher(apiStores.getHomeContent()
+            override fun createCall(): LiveData<ApiResponse<ProductDetailsData>> {
+                return LiveDataReactiveStreams.fromPublisher(apiStores.getProductDetails(id)
                     .map {
                         when {
                             it.code >= 200 && it.code < 300 -> {
                                 if (it.code == 204 || it.data == null) {
-                                    return@map ApiEmptyResponse<HomeContentData>()
+                                    return@map ApiEmptyResponse<ProductDetailsData>()
                                 } else {
                                     return@map ApiSuccessResponse(it.data!!)
                                 }
                             }
                             else -> {
-                                return@map ApiErrorResponse<HomeContentData>(
+                                return@map ApiErrorResponse<ProductDetailsData>(
                                     it.message ?: "Unknown Error"
                                 )
                             }
                         }
                     }
                     .onErrorReturn {
-                        ApiResponse.create<HomeContentData>(it)
+                        ApiResponse.create(it)
                     }
-                    .subscribeOn(io())
+                    .subscribeOn(Schedulers.io())
                     .toFlowable(BackpressureStrategy.BUFFER)
                 )
             }
+
         }.asLiveData()
     }
 }

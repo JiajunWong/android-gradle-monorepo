@@ -15,7 +15,7 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
-class OnBoardingRepository @Inject constructor(
+class OnBoardingRepository (
     private val appExecutors: AppExecutors,
     private val apiStores: ApiStores,
     private val sessionManager: SessionManager

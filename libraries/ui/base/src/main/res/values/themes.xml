@@ -28,6 +28,7 @@
         <item name="colorOnError">@color/white</item>
 
         <item name="dividerColor">@color/grey_400</item>
+        <item name="priceColor">@color/orange</item>
         <!--Material type attributes-->
         <item name="textAppearanceHeadline1">@style/TextAppearance.MyTheme.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.MyTheme.Headline2</item>

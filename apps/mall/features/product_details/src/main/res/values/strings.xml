@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fragment_product_details_currency">$</string>
+    <string name="fragment_product_original_price"><strike>Original price: %s</strike></string>
+</resources>
