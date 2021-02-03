@@ -36,24 +36,14 @@ android {
 }
 
 dependencies {
-    implementation project(":apps:mall:libraries:data_layer:product")
     implementation project(":apps:mall:libraries:network")
-    implementation project(":apps:mall:libraries:repositories")
-    implementation project(":libraries:ui:base")
-    implementation project(":libraries:ui:material_icons")
-    implementation project(":libraries:network:common")
 
     implementation deps.lifecycle.livedata_ktx
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.java8
+    implementation deps.lifecycle.reactivestreams
     implementation deps.kotlin.stdlib
     implementation deps.core_ktx
-    implementation deps.navigation.fragment_ktx
-    implementation deps.navigation.ui_ktx
-
-    implementation deps.material
-    implementation deps.app_compat
-    implementation deps.constraint_layout
 
     implementation deps.retrofit.retrofit
     implementation deps.retrofit.converter_gson
@@ -69,9 +59,6 @@ dependencies {
 
     implementation deps.rxjava2
     implementation deps.rx_android
-
-    kapt deps.glide.compiler
-    implementation deps.glide.runtime
 
     implementation deps.timber
 

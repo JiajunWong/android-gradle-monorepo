@@ -2,20 +2,28 @@ package com.sopherwang.mall.app_root
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sopherwang.libaries.ui.base.reduceDragSensitivity
+import com.sopherwang.libraries.data_layer.product.ProductViewModel
 import com.sopherwang.mall.feature.authorization.OnBoardingFragment
+import com.sopherwang.mall.features.product_details.ProductDetailsFragment
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private val productViewModel: ProductViewModel by viewModels()
+
     private lateinit var root: MotionLayout
     private lateinit var viewPager: ViewPager2
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var onBoardingFragment: OnBoardingFragment
+    private lateinit var productDetailFragment: ProductDetailsFragment
 
     private var lastProgress = 0f
 
@@ -25,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         setupRoot()
         setupBottomNavView()
         setupViewPager()
+        subscribeProductClick()
     }
 
     override fun onBackPressed() {
@@ -46,6 +55,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             })
+        productDetailFragment = ProductDetailsFragment.newInstance()
+
         root = findViewById(R.id.activity_main_root)
         root.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
@@ -127,5 +138,19 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    private fun subscribeProductClick() {
+        productViewModel.productLiveData.observe(this, Observer { product ->
+            Timber.tag(javaClass.simpleName).d("Product ${product.name} has clicked")
+
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction
+                .setCustomAnimations(R.animator.show, 0)
+            transaction
+                .setCustomAnimations(R.animator.show, 0)
+                .replace(R.id.main_page_product_details_container, productDetailFragment)
+                .commitNow()
+        })
     }
 }

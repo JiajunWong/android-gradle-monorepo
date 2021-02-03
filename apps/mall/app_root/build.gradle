@@ -38,18 +38,25 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(":apps:mall:features:onboarding")
+    implementation project(":apps:mall:features:product_details")
     implementation project(":apps:mall:features:tab_main")
     implementation project(":apps:mall:features:tab_category")
     implementation project(":apps:mall:features:tab_subject")
     implementation project(":apps:mall:features:tab_me")
+    implementation project(":apps:mall:libraries:data_layer:product")
     implementation project(":apps:mall:libraries:network")
     implementation project(":apps:mall:libraries:repositories")
     implementation project(":libraries:network:common")
     implementation project(":libraries:ui:base")
     implementation project(":libraries:ui:material_icons")
 
+    implementation deps.lifecycle.livedata_ktx
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.java8
     implementation deps.kotlin.stdlib
     implementation deps.core_ktx
+    implementation deps.navigation.fragment_ktx
+    implementation deps.navigation.ui_ktx
 
     implementation deps.material
     implementation deps.app_compat

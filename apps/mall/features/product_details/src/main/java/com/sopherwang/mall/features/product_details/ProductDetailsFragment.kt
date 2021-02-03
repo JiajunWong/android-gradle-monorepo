@@ -7,14 +7,23 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
+import com.sopherwang.libraries.data_layer.product.ProductViewModel
 import com.sopherwang.libraries.network.common.models.Status
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class ProductDetailsFragment : Fragment() {
+    companion object {
+        fun newInstance() = ProductDetailsFragment()
+    }
+
     private val productDetailsViewModel: ProductDetailsViewModel by viewModels()
+    private val productViewModel: ProductViewModel by activityViewModels()
 
     private lateinit var productImage: ImageView
     private lateinit var priceTextView: TextView
@@ -63,5 +72,9 @@ class ProductDetailsFragment : Fragment() {
                     }
                 }
             })
+
+        productViewModel.productLiveData.observe(viewLifecycleOwner, Observer { product ->
+            Timber.tag(javaClass.simpleName).d("Product ${product.name} has clicked")
+        })
     }
 }

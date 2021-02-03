@@ -12,7 +12,7 @@ import com.sopherwang.mall.features.tab_main.R
 import com.sopherwang.mall.libraries.network.models.Product
 import java.math.BigDecimal
 
-class ProductGridAdapter(private val context: Context) :
+class ProductGridAdapter(private val context: Context, private val onProductItemClickListener: OnProductItemClickListener) :
     RecyclerView.Adapter<ProductGridAdapter.ViewHolder>() {
     private val productList: MutableList<Product> = mutableListOf()
 
@@ -36,6 +36,10 @@ class ProductGridAdapter(private val context: Context) :
             soldTextView.text =
                 context.getString(R.string.main_page_list_item_has_sold, product.sale)
             Glide.with(context).load(product.pic).into(imageView)
+
+            holder.itemView.setOnClickListener {
+                onProductItemClickListener.onClicked(product)
+            }
         }
     }
 
@@ -53,5 +57,9 @@ class ProductGridAdapter(private val context: Context) :
         val nameTextView: TextView = item.findViewById(R.id.list_item_main_product_name)
         val priceTextView: TextView = item.findViewById(R.id.list_item_main_product_price)
         val soldTextView: TextView = item.findViewById(R.id.list_item_main_product_sold)
+    }
+
+    interface OnProductItemClickListener {
+        fun onClicked(product: Product);
     }
 }

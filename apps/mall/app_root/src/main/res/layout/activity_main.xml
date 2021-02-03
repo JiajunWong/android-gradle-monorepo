@@ -31,9 +31,9 @@
         android:id="@+id/main_page_cart_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_cart"
         android:layout_marginEnd="@dimen/ui_base_dimen_2x"
         android:layout_marginBottom="@dimen/ui_base_dimen_2x"
+        android:src="@drawable/ic_cart"
         app:layout_constraintBottom_toTopOf="@+id/main_page_bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="ContentDescription" />
@@ -42,12 +42,12 @@
         android:id="@+id/main_page_cart_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="4dp"
         android:background="?colorSurface"
-        android:layout_marginStart="@dimen/ui_base_dimen_0.5x"
-        android:layout_marginTop="@dimen/ui_base_dimen_0.5x"
-        app:layout_constraintBottom_toTopOf="@+id/main_page_cart_fab"
-        app:layout_constraintEnd_toStartOf="@+id/main_page_cart_fab"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:elevation="4dp" />
+
+    <FrameLayout
+        android:id="@+id/main_page_product_details_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="4dp" />
 </androidx.constraintlayout.motion.widget.MotionLayout>
