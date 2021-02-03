@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
@@ -14,6 +15,7 @@ import com.sopherwang.mall.feature.authorization.OnBoardingFragment
 import com.sopherwang.mall.features.product_details.ProductDetailsFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import kotlin.math.abs
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setupFragment()
         setupRoot()
         setupBottomNavView()
         setupViewPager()
@@ -37,16 +40,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (!onBoardingFragment.onBackPressed()) {
-            if (onBoardingFragment.isAdded) {
+        if (onBoardingFragment.isAdded) {
+            if (!onBoardingFragment.onBackPressed()) {
                 root.transitionToStart()
+                return
             } else {
-                super.onBackPressed()
+                return
             }
         }
+
+        if (productDetailFragment.isAdded) {
+            detachFragment(productDetailFragment)
+            return
+        }
+
+        super.onBackPressed()
     }
 
-    private fun setupRoot() {
+    private fun setupFragment() {
         onBoardingFragment =
             OnBoardingFragment.newInstance(object : OnBoardingFragment.AuthSuccessListener {
                 override fun onAuthSuccess() {
@@ -56,7 +67,9 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         productDetailFragment = ProductDetailsFragment.newInstance()
+    }
 
+    private fun setupRoot() {
         root = findViewById(R.id.activity_main_root)
         root.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
@@ -65,26 +78,15 @@ class MainActivity : AppCompatActivity() {
             override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
                 if (p3 - lastProgress > 0) {
                     // from start to end
-                    val atEnd = Math.abs(p3 - 1f) < 0.1f
+                    val atEnd = abs(p3 - 1f) < 0.1f
                     if (atEnd) {
-                        val transaction = supportFragmentManager.beginTransaction()
-                        transaction
-                            .setCustomAnimations(R.animator.show, 0)
-                        transaction
-                            .setCustomAnimations(R.animator.show, 0)
-                            .replace(R.id.main_page_cart_container, onBoardingFragment)
-                            .commitNow()
+                        attachFragment(onBoardingFragment)
                     }
                 } else {
                     // from end to start
                     val atStart = p3 < 0.9f
                     if (atStart) {
-                        val transaction = supportFragmentManager.beginTransaction()
-                        transaction
-                            .setCustomAnimations(0, R.animator.hide)
-                        transaction
-                            .remove(onBoardingFragment)
-                            .commitNow()
+                        detachFragment(onBoardingFragment)
                     }
                 }
                 lastProgress = p3
@@ -143,14 +145,23 @@ class MainActivity : AppCompatActivity() {
     private fun subscribeProductClick() {
         productViewModel.productLiveData.observe(this, Observer { product ->
             Timber.tag(javaClass.simpleName).d("Product ${product.name} has clicked")
-
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction
-                .setCustomAnimations(R.animator.show, 0)
-            transaction
-                .setCustomAnimations(R.animator.show, 0)
-                .replace(R.id.main_page_product_details_container, productDetailFragment)
-                .commitNow()
+            attachFragment(productDetailFragment)
         })
+    }
+
+    private fun attachFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction
+            .setCustomAnimations(R.animator.show, 0)
+            .replace(R.id.main_page_product_details_container, fragment)
+            .commitNow()
+    }
+
+    private fun detachFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction
+            .setCustomAnimations(0, R.animator.hide)
+        transaction
+            .remove(fragment).commitNow()
     }
 }

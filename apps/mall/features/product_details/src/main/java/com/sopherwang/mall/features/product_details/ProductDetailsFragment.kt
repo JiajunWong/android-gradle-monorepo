@@ -12,8 +12,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.card.MaterialCardView
 import com.sopherwang.libraries.data_layer.product.ProductViewModel
 import com.sopherwang.libraries.network.common.models.Status
+import com.sopherwang.mall.libraries.network.models.Brand
 import com.sopherwang.mall.libraries.network.models.Product
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -32,6 +34,7 @@ class ProductDetailsFragment : Fragment() {
     private lateinit var originalPriceTextView: TextView
     private lateinit var productNameTextView: TextView
     private lateinit var attributeRecyclerView: RecyclerView
+    private lateinit var brandcontainer: MaterialCardView
     private lateinit var brandLogoImageView: ImageView
     private lateinit var brandNameTextView: TextView
     private lateinit var brandDescriptionTextView: TextView
@@ -48,6 +51,7 @@ class ProductDetailsFragment : Fragment() {
         productNameTextView = view.findViewById(R.id.fragment_product_details_name)
         attributeRecyclerView =
             view.findViewById(R.id.fragment_product_details_attribute_recycler_view)
+        brandcontainer = view.findViewById(R.id.fragment_product_details_brand_container)
         brandLogoImageView = view.findViewById(R.id.fragment_product_details_brand_logo)
         brandNameTextView = view.findViewById(R.id.fragment_product_details_brand_name)
         brandDescriptionTextView =
@@ -82,6 +86,9 @@ class ProductDetailsFragment : Fragment() {
                         it.data?.product?.let { product ->
                             updateViewByProduct(product)
                         }
+                        it.data?.brand?.let { brand ->
+                            updateViewByBrand(brand)
+                        }
                     }
                     Status.ERROR -> {
                         Timber.tag(javaClass.simpleName)
@@ -96,5 +103,12 @@ class ProductDetailsFragment : Fragment() {
         priceTextView.text = product.price.toString()
         originalPriceTextView.text = getString(R.string.fragment_product_original_price, product.originalPrice)
         productNameTextView.text = product.name
+    }
+
+    private fun updateViewByBrand(brand: Brand) {
+        brandcontainer.visibility = View.VISIBLE
+        Glide.with(this).load(brand.logo).into(brandLogoImageView)
+        brandNameTextView.text = brand.name
+        brandDescriptionTextView.text = brand.brandStory
     }
 }
