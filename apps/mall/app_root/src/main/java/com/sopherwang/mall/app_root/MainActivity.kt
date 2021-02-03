@@ -3,6 +3,7 @@ package com.sopherwang.mall.app_root
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.annotation.IdRes
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -80,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                     // from start to end
                     val atEnd = abs(p3 - 1f) < 0.1f
                     if (atEnd) {
-                        attachFragment(onBoardingFragment)
+                        attachFragment(onBoardingFragment, R.id.main_page_cart_container)
                     }
                 } else {
                     // from end to start
@@ -145,15 +146,15 @@ class MainActivity : AppCompatActivity() {
     private fun subscribeProductClick() {
         productViewModel.productLiveData.observe(this, Observer { product ->
             Timber.tag(javaClass.simpleName).d("Product ${product.name} has clicked")
-            attachFragment(productDetailFragment)
+            attachFragment(productDetailFragment, R.id.main_page_product_details_container)
         })
     }
 
-    private fun attachFragment(fragment: Fragment) {
+    private fun attachFragment(fragment: Fragment, @IdRes id: Int) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction
             .setCustomAnimations(R.animator.show, 0)
-            .replace(R.id.main_page_product_details_container, fragment)
+            .replace(id, fragment)
             .commitNow()
     }
 
