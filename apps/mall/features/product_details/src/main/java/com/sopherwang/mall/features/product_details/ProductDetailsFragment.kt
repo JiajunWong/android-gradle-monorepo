@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.card.MaterialCardView
 import com.sopherwang.libraries.data_layer.product.ProductViewModel
 import com.sopherwang.libraries.network.common.models.Status
+import com.sopherwang.mall.features.product_details.add_cart.AddCartBottomSheetFragment
 import com.sopherwang.mall.libraries.network.models.Brand
 import com.sopherwang.mall.libraries.network.models.Product
 import com.sopherwang.mall.libraries.network.models.ProductAttribute
@@ -42,6 +44,7 @@ class ProductDetailsFragment : Fragment() {
     private lateinit var brandLogoImageView: ImageView
     private lateinit var brandNameTextView: TextView
     private lateinit var brandDescriptionTextView: TextView
+    private lateinit var addCartButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,6 +63,10 @@ class ProductDetailsFragment : Fragment() {
         brandNameTextView = view.findViewById(R.id.fragment_product_details_brand_name)
         brandDescriptionTextView =
             view.findViewById(R.id.fragment_product_details_brand_description)
+        addCartButton = view.findViewById(R.id.fragment_product_details_add_to_cart_button)
+        addCartButton.setOnClickListener {
+            showAddCartBottomSheet()
+        }
         return view
     }
 
@@ -130,5 +137,12 @@ class ProductDetailsFragment : Fragment() {
         Glide.with(this).load(brand.logo).into(brandLogoImageView)
         brandNameTextView.text = brand.name
         brandDescriptionTextView.text = brand.brandStory
+    }
+
+    private fun showAddCartBottomSheet() {
+        productDetailsViewModel.productDetailsLiveData.value?.data?.let {
+            val addCartBottomSheetFragment = AddCartBottomSheetFragment.newInstance(it)
+            addCartBottomSheetFragment.show(parentFragmentManager, "dd")
+        }
     }
 }

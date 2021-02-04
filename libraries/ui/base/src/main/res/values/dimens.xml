@@ -10,6 +10,7 @@
     <dimen name="ui_base_dimen_6x">48dp</dimen>
     <dimen name="ui_base_dimen_7x">56dp</dimen>
     <dimen name="ui_base_dimen_8x">64dp</dimen>
+    <dimen name="ui_base_dimen_9x">72dp</dimen>
 
     <dimen name="component_label_horizontal_margin">@dimen/ui_base_dimen_2x</dimen>
     <dimen name="elevation_default_top_app_bar">@dimen/ui_base_dimen_0.5x</dimen>

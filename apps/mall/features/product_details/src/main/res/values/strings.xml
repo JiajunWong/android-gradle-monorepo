@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="fragment_product_details_currency">$</string>
+    <string name="fragment_product_details_price">$%d</string>
     <string name="fragment_product_original_price"><strike>Original price: %d</strike></string>
+    <string name="fragment_product_add_to_cart">Add to cart</string>
+    <string name="fragment_product_confirm">Confirm</string>
 </resources>
