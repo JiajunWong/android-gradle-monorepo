@@ -4,5 +4,7 @@
     <string name="fragment_product_details_price">$%d</string>
     <string name="fragment_product_original_price"><strike>Original price: %d</strike></string>
     <string name="fragment_product_add_to_cart">Add to cart</string>
+    <string name="fragment_product_add">Add</string>
+    <string name="fragment_product_minus">Remove</string>
     <string name="fragment_product_confirm">Confirm</string>
 </resources>

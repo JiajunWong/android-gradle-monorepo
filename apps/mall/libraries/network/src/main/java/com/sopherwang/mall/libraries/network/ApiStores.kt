@@ -2,10 +2,7 @@ package com.sopherwang.mall.libraries.network
 
 import com.sopherwang.mall.libraries.network.models.*
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiStores {
     @GET("home/content")
@@ -22,4 +19,7 @@ interface ApiStores {
 
     @GET("product/detail/{id}")
     abstract fun getProductDetails(@Path("id") id: Int): Observable<ProductDetailsResponse>
+
+    @POST("cart/add")
+    abstract fun addCartItem(@Body addCartItemRequest: AddCartItemRequest): Observable<AddCartItemResponse>
 }

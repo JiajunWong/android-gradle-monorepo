@@ -15,19 +15,35 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun homeContentRepository(appExecutors: AppExecutors, apiStores: ApiStores): HomeContentRepository {
+    fun homeContentRepository(
+        appExecutors: AppExecutors,
+        apiStores: ApiStores
+    ): HomeContentRepository {
         return HomeContentRepository(appExecutors, apiStores)
     }
 
     @Singleton
     @Provides
-    fun onboardingRepository(appExecutors: AppExecutors, apiStores: ApiStores, sessionManager: SessionManager): OnBoardingRepository {
+    fun onboardingRepository(
+        appExecutors: AppExecutors,
+        apiStores: ApiStores,
+        sessionManager: SessionManager
+    ): OnBoardingRepository {
         return OnBoardingRepository(appExecutors, apiStores, sessionManager)
     }
 
     @Singleton
     @Provides
-    fun productDetailsRepository(appExecutors: AppExecutors, apiStores: ApiStores): ProductDetailsRepository {
+    fun productDetailsRepository(
+        appExecutors: AppExecutors,
+        apiStores: ApiStores
+    ): ProductDetailsRepository {
         return ProductDetailsRepository(appExecutors, apiStores)
+    }
+
+    @Singleton
+    @Provides
+    fun cartRepository(appExecutors: AppExecutors, apiStores: ApiStores): CartRepository {
+        return CartRepository(appExecutors, apiStores)
     }
 }

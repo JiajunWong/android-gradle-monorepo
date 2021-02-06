@@ -27,6 +27,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/ui_base_dimen_2x"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textColor="@color/material_on_surface_emphasis_high_type"
             app:layout_constraintBottom_toTopOf="@id/fragment_add_cart_price"
             app:layout_constraintStart_toEndOf="@id/fragment_add_cart_thumbnail"
             app:layout_constraintTop_toTopOf="parent"
@@ -36,8 +38,10 @@
             android:id="@+id/fragment_add_cart_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ui_base_dimen_1x"
             android:layout_marginHorizontal="@dimen/ui_base_dimen_2x"
+            android:layout_marginTop="@dimen/ui_base_dimen_1x"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="?priceColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/fragment_add_cart_thumbnail"
             app:layout_constraintTop_toBottomOf="@id/fragment_add_cart_name" />
@@ -49,6 +53,40 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/ui_base_dimen_2x"
         android:paddingVertical="@dimen/ui_base_dimen_1x" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/ui_base_dimen_2x"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/fragment_add_cart_quantity_minus"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/fragment_product_minus" />
+
+        <TextView
+            android:id="@+id/fragment_add_cart_quantity_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="@dimen/ui_base_dimen_2x"
+            android:text="1"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textColor="@color/material_on_surface_emphasis_high_type" />
+
+        <Button
+            android:id="@+id/fragment_add_cart_quantity_add"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/fragment_product_add" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/fragment_add_cart_button"
