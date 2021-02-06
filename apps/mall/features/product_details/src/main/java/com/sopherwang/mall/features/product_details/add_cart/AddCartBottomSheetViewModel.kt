@@ -13,6 +13,7 @@ import com.sopherwang.mall.libraries.repositories.CartRepository
 class AddCartBottomSheetViewModel @ViewModelInject constructor(private val cartRepository: CartRepository): ViewModel() {
     private val attributeList: MutableList<ProductAttribute> = mutableListOf()
     private val customerInputs: MutableMap<String, String> = mutableMapOf()
+    private var productId: Int = 0
 
     private val addCartItemRequestData = MutableLiveData<AddCartItemRequest>()
     val addCartItemResponseData: LiveData<Resource<Int>> = addCartItemRequestData.switchMap {
@@ -38,5 +39,13 @@ class AddCartBottomSheetViewModel @ViewModelInject constructor(private val cartR
 
     fun updateAddCartRequest(addCartItemRequest: AddCartItemRequest) {
         addCartItemRequestData.value = addCartItemRequest
+    }
+
+    fun updateProductId(id: Int) {
+        this.productId = id
+    }
+
+    fun getProductId(): Int{
+        return productId
     }
 }

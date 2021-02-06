@@ -31,7 +31,7 @@ class ProductDetailsFragment : Fragment() {
         fun newInstance() = ProductDetailsFragment()
     }
 
-    private val productDetailsViewModel: ProductDetailsViewModel by viewModels()
+    private val productDetailsViewModel: ProductDetailsViewModel by activityViewModels()
     private val productViewModel: ProductViewModel by activityViewModels()
     private val productDetailsAttributeAdapter = ProductDetailsAttributeAdapter()
 
@@ -140,9 +140,6 @@ class ProductDetailsFragment : Fragment() {
     }
 
     private fun showAddCartBottomSheet() {
-        productDetailsViewModel.productDetailsLiveData.value?.data?.let {
-            val addCartBottomSheetFragment = AddCartBottomSheetFragment.newInstance(it)
-            addCartBottomSheetFragment.show(parentFragmentManager, "dd")
-        }
+        AddCartBottomSheetFragment.newInstance().show(parentFragmentManager, AddCartBottomSheetFragment.javaClass.simpleName)
     }
 }
