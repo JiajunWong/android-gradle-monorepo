@@ -29,4 +29,13 @@ class SessionManager @Inject constructor(@ApplicationContext private val context
     fun fetchAuthToken(): String? {
         return prefs.getString(USER_TOKEN, null)
     }
+
+    /**
+     * Function to clear auth token
+     */
+    fun clearAuthToken() {
+        val editor = prefs.edit()
+        editor.putString(USER_TOKEN, null)
+        editor.apply()
+    }
 }

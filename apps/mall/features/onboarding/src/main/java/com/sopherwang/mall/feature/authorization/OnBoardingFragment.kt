@@ -7,17 +7,20 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.textfield.TextInputEditText
 import com.sopherwang.libaries.ui.base.hideKeyboard
 import com.sopherwang.libraries.network.common.models.Status
+import com.sopherwang.mall.libraries.data_layer.session.SessionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class OnBoardingFragment(private val authSuccessListener: AuthSuccessListener) : Fragment() {
+class OnBoardingFragment() : Fragment() {
     private val onBoardingViewModel: OnBoardingViewModel by viewModels()
+    private val sessionViewModel: SessionViewModel by activityViewModels()
 
     lateinit var root: MotionLayout
     lateinit var signUpButton: Button
@@ -31,7 +34,7 @@ class OnBoardingFragment(private val authSuccessListener: AuthSuccessListener) :
     lateinit var loginPassword: TextInputEditText
 
     companion object {
-        fun newInstance(authSuccessListener: AuthSuccessListener) = OnBoardingFragment(authSuccessListener)
+        fun newInstance() = OnBoardingFragment()
     }
 
     override fun onCreateView(
@@ -124,7 +127,7 @@ class OnBoardingFragment(private val authSuccessListener: AuthSuccessListener) :
                     Status.SUCCESS -> {
                         Timber.tag(javaClass.simpleName).d("subscribeSignUp() success.")
                         root.hideKeyboard()
-                        authSuccessListener.onAuthSuccess()
+                        sessionViewModel.updateAuthenticationStatus(true)
                     }
                     Status.ERROR -> {
                         Timber.tag(javaClass.simpleName).d("subscribeSignUp() error = ${it.message}.")
@@ -144,7 +147,7 @@ class OnBoardingFragment(private val authSuccessListener: AuthSuccessListener) :
                     Status.SUCCESS -> {
                         Timber.tag(javaClass.simpleName).d("subscribeLogin() success.")
                         root.hideKeyboard()
-                        authSuccessListener.onAuthSuccess()
+                        sessionViewModel.updateAuthenticationStatus(true)
                     }
                     Status.ERROR -> {
                         Timber.tag(javaClass.simpleName).d("subscribeLogin() error = ${it.message}.")

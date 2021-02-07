@@ -13,7 +13,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sopherwang.libaries.ui.base.reduceDragSensitivity
 import com.sopherwang.libraries.data_layer.product.ProductViewModel
 import com.sopherwang.mall.feature.authorization.OnBoardingFragment
+import com.sopherwang.mall.features.cart_list.CartListFragment
 import com.sopherwang.mall.features.product_details.ProductDetailsFragment
+import com.sopherwang.mall.libraries.data_layer.session.SessionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import kotlin.math.abs
@@ -21,12 +23,14 @@ import kotlin.math.abs
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val productViewModel: ProductViewModel by viewModels()
+    private val sessionViewModel: SessionViewModel by viewModels()
 
     private lateinit var root: MotionLayout
     private lateinit var viewPager: ViewPager2
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var onBoardingFragment: OnBoardingFragment
     private lateinit var productDetailFragment: ProductDetailsFragment
+    private lateinit var cartListFragment: CartListFragment
 
     private var lastProgress = 0f
 
@@ -38,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         setupBottomNavView()
         setupViewPager()
         subscribeProductClick()
+        subscribeSessionChange()
     }
 
     override fun onBackPressed() {
@@ -59,15 +64,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupFragment() {
-        onBoardingFragment =
-            OnBoardingFragment.newInstance(object : OnBoardingFragment.AuthSuccessListener {
-                override fun onAuthSuccess() {
-                    if (onBoardingFragment.isAdded) {
-                        root.transitionToStart()
-                    }
-                }
-            })
+        onBoardingFragment = OnBoardingFragment.newInstance()
         productDetailFragment = ProductDetailsFragment.newInstance()
+        cartListFragment = CartListFragment.newInstance()
     }
 
     private fun setupRoot() {
@@ -81,13 +80,17 @@ class MainActivity : AppCompatActivity() {
                     // from start to end
                     val atEnd = abs(p3 - 1f) < 0.1f
                     if (atEnd) {
-                        attachFragment(onBoardingFragment, R.id.main_page_cart_container)
+                        val fragment =
+                            if (true != sessionViewModel.hasAuthenticatedLiveData.value) onBoardingFragment else cartListFragment
+                        attachFragment(fragment, R.id.main_page_cart_container)
                     }
                 } else {
                     // from end to start
                     val atStart = p3 < 0.9f
                     if (atStart) {
-                        detachFragment(onBoardingFragment)
+                        val fragment =
+                            if (true != sessionViewModel.hasAuthenticatedLiveData.value) onBoardingFragment else cartListFragment
+                        detachFragment(fragment)
                     }
                 }
                 lastProgress = p3
@@ -147,6 +150,18 @@ class MainActivity : AppCompatActivity() {
         productViewModel.productLiveData.observe(this, Observer { product ->
             Timber.tag(javaClass.simpleName).d("Product ${product.name} has clicked")
             attachFragment(productDetailFragment, R.id.main_page_product_details_container)
+        })
+    }
+
+
+    private fun subscribeSessionChange() {
+        sessionViewModel.hasAuthenticatedLiveData.observe(this, Observer { hasAuthed ->
+            if (hasAuthed && onBoardingFragment.isAdded) {
+                attachFragment(cartListFragment, R.id.main_page_cart_container)
+            }
+            if (!hasAuthed && cartListFragment.isAdded) {
+                attachFragment(onBoardingFragment, R.id.main_page_cart_container)
+            }
         })
     }
 
