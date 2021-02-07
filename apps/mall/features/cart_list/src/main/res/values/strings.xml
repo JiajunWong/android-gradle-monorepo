@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fragment_cart_list_your_cart">Your cart</string>
+    <string name="fragment_cart_list_place_order">Place order</string>
+</resources>

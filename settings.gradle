@@ -1,3 +1,4 @@
+include ':apps:mall:features:cart_list'
 include ':apps:mall:libraries:data_layer:product'
 include ':apps:mall:features:product_details'
 include ':apps:mall:features:onboarding'
